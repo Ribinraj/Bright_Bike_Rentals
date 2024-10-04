@@ -45,7 +45,7 @@ class ScreenHomepage extends StatelessWidget {
     ];
 
     return Scaffold(
-      appBar: CustomAppBar(),
+      appBar: const CustomAppBar(),
       drawer: const CustomDrawer(),
       body: ListView(
         padding: EdgeInsets.all(ResponsiveUtils.wp(4)),

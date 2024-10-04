@@ -1,15 +1,20 @@
 import 'dart:developer';
 
+import 'package:bright_bike_rentals/core/colors.dart';
+
+import 'package:bright_bike_rentals/core/responsive_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 class DateTimeSelectionWidget extends StatefulWidget {
+  final Function(DateTime, TimeOfDay) onDateTimeChanged;
+  const DateTimeSelectionWidget({super.key, required this.onDateTimeChanged});
+
   @override
-  _DateTimeSelectionWidgetState createState() =>
-      _DateTimeSelectionWidgetState();
+  DateTimeSelectionWidgetState createState() => DateTimeSelectionWidgetState();
 }
 
-class _DateTimeSelectionWidgetState extends State<DateTimeSelectionWidget> {
+class DateTimeSelectionWidgetState extends State<DateTimeSelectionWidget> {
   DateTime selectedDate = DateTime.now();
   TimeOfDay selectedTime = TimeOfDay.now();
   List<String> timeSlots = [];
@@ -83,58 +88,59 @@ class _DateTimeSelectionWidgetState extends State<DateTimeSelectionWidget> {
         log(selectedDate.toString());
         _generateTimeSlots(); // Regenerate time slots when date changes
       });
+      widget.onDateTimeChanged(selectedDate, selectedTime);
     }
+      DateTime getSelectedDate() => selectedDate;
+  TimeOfDay getSelectedTime() => selectedTime;
   }
 
   @override
   Widget build(BuildContext context) {
     return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Expanded(
-          child: Container(
-            padding: const EdgeInsets.all(8),
-            decoration: BoxDecoration(
-              border: Border.all(color: Colors.grey),
-              borderRadius: BorderRadius.circular(4),
-            ),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(DateFormat('yyyy-MM-dd').format(selectedDate)),
-                IconButton(
-                  icon: const Icon(Icons.calendar_today),
-                  onPressed: () => _selectDate(context),
-                ),
-              ],
-            ),
+        Container(
+          padding: EdgeInsets.only(left: ResponsiveUtils.wp(2)),
+          width: ResponsiveUtils.wp(50),
+          decoration: BoxDecoration(
+            border: Border.all(color: Appcolors.kblackColor),
+            borderRadius: BorderRadius.circular(5),
+          ),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(DateFormat('yyyy-MM-dd').format(selectedDate)),
+              IconButton(
+                icon: const Icon(Icons.calendar_today),
+                onPressed: () => _selectDate(context),
+              ),
+            ],
           ),
         ),
-        const SizedBox(width: 16),
-        Expanded(
-          child: Container(
-            padding: const EdgeInsets.all(8),
-            decoration: BoxDecoration(
-              border: Border.all(color: Colors.grey),
-              borderRadius: BorderRadius.circular(4),
-            ),
-            child: DropdownButton<String>(
-              isExpanded: true,
-              value: _formatTimeOfDay(selectedTime),
-              onChanged: (String? newValue) {
-                if (newValue != null) {
-                  setState(() {
-                    selectedTime = _parseTimeString(newValue);
-                  });
-                }
-                log(selectedTime.toString());
-              },
-              items: timeSlots.map<DropdownMenuItem<String>>((String value) {
-                return DropdownMenuItem<String>(
-                  value: value,
-                  child: Text(value),
-                );
-              }).toList(),
-            ),
+        Container(
+          padding: EdgeInsets.only(left: ResponsiveUtils.wp(2)),
+          width: ResponsiveUtils.wp(30),
+          decoration: BoxDecoration(
+            border: Border.all(color: Appcolors.kblackColor),
+            borderRadius: BorderRadius.circular(5),
+          ),
+          child: DropdownButton<String>(
+            isExpanded: true,
+            value: _formatTimeOfDay(selectedTime),
+            onChanged: (String? newValue) {
+              if (newValue != null) {
+                setState(() {
+                  selectedTime = _parseTimeString(newValue);
+                });
+              }
+              log(selectedTime.toString());
+            },
+            items: timeSlots.map<DropdownMenuItem<String>>((String value) {
+              return DropdownMenuItem<String>(
+                value: value,
+                child: Text(value),
+              );
+            }).toList(),
           ),
         ),
       ],
