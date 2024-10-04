@@ -1,7 +1,7 @@
 import 'package:bright_bike_rentals/core/colors.dart';
 import 'package:bright_bike_rentals/core/responsive_utils.dart';
 import 'package:bright_bike_rentals/presentation/screens/Mainpage/mainpage.dart';
-import 'package:bright_bike_rentals/presentation/screens/signin_page/siginin_page.dart';
+
 import 'package:flutter/material.dart';
 
 void main() {

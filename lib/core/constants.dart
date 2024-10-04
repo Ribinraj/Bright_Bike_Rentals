@@ -3,7 +3,6 @@
 import 'package:bright_bike_rentals/core/responsive_utils.dart';
 import 'package:flutter/material.dart';
 
-
 class ResponsiveText extends StatelessWidget {
   final String text;
   final double? sizeFactor;
@@ -11,7 +10,8 @@ class ResponsiveText extends StatelessWidget {
   final Color? color;
 
   const ResponsiveText(
-    this.text, {super.key, 
+    this.text, {
+    super.key,
     this.sizeFactor,
     this.weight,
     this.color,
@@ -21,7 +21,7 @@ class ResponsiveText extends StatelessWidget {
   Widget build(BuildContext context) {
     // Base size is 4% of screen width
     final baseSize = ResponsiveUtils.sp(4);
-    
+
     return Text(
       text,
       style: TextStyle(
@@ -35,7 +35,8 @@ class ResponsiveText extends StatelessWidget {
 
 // Optional: Predefined text styles
 class TextStyles {
-  static ResponsiveText headline({String? text, FontWeight? weight, Color? color}) {
+  static ResponsiveText headline(
+      {String? text, FontWeight? weight, Color? color}) {
     return ResponsiveText(
       text ?? '',
       sizeFactor: 1.5, // 50% larger than base size
@@ -44,10 +45,11 @@ class TextStyles {
     );
   }
 
-  static ResponsiveText subheadline({String? text, FontWeight? weight, Color? color}) {
+  static ResponsiveText subheadline(
+      {String? text, FontWeight? weight, Color? color}) {
     return ResponsiveText(
       text ?? '',
-      sizeFactor: 1.25, // 25% larger than base size
+      sizeFactor: 1.22, 
       weight: weight ?? FontWeight.w600,
       color: color,
     );
@@ -62,7 +64,8 @@ class TextStyles {
     );
   }
 
-  static ResponsiveText caption({String? text, FontWeight? weight, Color? color}) {
+  static ResponsiveText caption(
+      {String? text, FontWeight? weight, Color? color}) {
     return ResponsiveText(
       text ?? '',
       sizeFactor: 0.75, // 25% smaller than base size
@@ -101,17 +104,14 @@ class TextStyles {
 //   sizeFactor: 2.0, // Twice the base size
 // )
 //////////////////////////
-  //  Text(
-  //               'Welcome to our responsive app!',
-  //               style: TextStyle(
-  //                 fontSize: ResponsiveUtils.sp(6),
-  //                 fontWeight: FontWeight.bold,
-  //               ),
-  //             ),
-  /////////////------------------borderradius-----------------/////////////////
-
-
-
+//  Text(
+//               'Welcome to our responsive app!',
+//               style: TextStyle(
+//                 fontSize: ResponsiveUtils.sp(6),
+//                 fontWeight: FontWeight.bold,
+//               ),
+//             ),
+/////////////------------------borderradius-----------------/////////////////
 
 class ResponsiveBorderRadius {
   final double? sizeFactor;
@@ -172,7 +172,6 @@ class BorderRadiusStyles {
 //   child: Text('Custom radius'),
 // )
 //////////////-------sizedbox---------------////////////
-
 
 class ResponsiveSizedBox {
   // Height constants
