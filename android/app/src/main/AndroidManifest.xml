@@ -6,6 +6,9 @@
             <data android:scheme="tel" />
         </intent>
     </queries>
+    <queries>
+    <package android:name="com.whatsapp" />
+</queries>
     <application
         android:label="bright_bike_rentals"
         android:name="${applicationName}"

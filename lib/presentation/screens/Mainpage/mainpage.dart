@@ -28,18 +28,15 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 //   }
 // }
 
-
-
 class ScreenMainPage extends StatelessWidget {
   ScreenMainPage({super.key});
 
   final List<Widget> _pages = [
     const ScreenHomepage(),
     const ScreenSearchPage(),
-    const ScreenCartPage(),
+    const ScreenCartpage(),
     const ScreenBookingPage(),
     const ScreenAccountPage()
-   
   ];
 
   @override

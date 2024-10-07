@@ -25,11 +25,12 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(
           fontFamily: 'Helvetica',
           useMaterial3: true,
+          scaffoldBackgroundColor: Appcolors.kwhiteColor,
           textSelectionTheme: const TextSelectionThemeData(
             cursorColor: Appcolors.kblackColor,
           ),
         ),
-        home:ScreenMainPage(),
+        home: ScreenMainPage(),
       ),
     );
   }

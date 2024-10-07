@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:bright_bike_rentals/core/constants.dart';
 import 'package:bright_bike_rentals/core/responsive_utils.dart';
 import 'package:bright_bike_rentals/presentation/screens/searchpage/widgets/date_time_selection_widget.dart';
@@ -62,8 +64,8 @@ class _ScreenSearchPageState extends State<ScreenSearchPage> {
                       fromTime != null &&
                       toDate != null &&
                       toTime != null) {
-                    debugPrint(fromDate.toString());
-                    debugPrint(toDate.toString());
+                    log(fromDate.toString());
+                    log(toDate.toString());
                   }
                   navigatePush(context, const ScreenSearchResult());
                 },

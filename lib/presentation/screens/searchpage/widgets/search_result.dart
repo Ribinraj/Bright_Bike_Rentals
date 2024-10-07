@@ -117,8 +117,10 @@ class _ScreenSearchResultState extends State<ScreenSearchResult> {
                           width: double.infinity,
                           height: ResponsiveUtils.hp(3.5),
                           child: CustomRoundElevatedButton(
-                            text: 'Book Now',
-                            buttoncolor: Appcolors.korangeColor,
+                            text: index == 2 ? 'Sold out' : 'Booknow',
+                            buttoncolor: index == 2
+                                ? Appcolors.kgreyColor
+                                : Appcolors.korangeColor,
                             onpress: () {},
                           ),
                         ),
