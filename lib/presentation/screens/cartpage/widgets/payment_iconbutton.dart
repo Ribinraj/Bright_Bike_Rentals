@@ -1,4 +1,5 @@
 import 'package:bright_bike_rentals/core/colors.dart';
+import 'package:bright_bike_rentals/core/responsive_utils.dart';
 
 import 'package:flutter/material.dart';
 
@@ -15,8 +16,8 @@ class PaymentIconButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 20,
-      height: 20,
+      width: ResponsiveUtils.wp(5),
+      height: ResponsiveUtils.hp(2.5),
       decoration: BoxDecoration(
         shape: BoxShape.circle,
         border: Border.all(
@@ -29,8 +30,8 @@ class PaymentIconButton extends StatelessWidget {
         constraints: const BoxConstraints(),
         icon: Icon(
           Icons.circle,
-          size: 18,
-          color: isClicked ?Appcolors.kyellowColor : Appcolors.kgreyColor,
+          size: ResponsiveUtils.wp(4),
+          color: isClicked ? Appcolors.kyellowColor : Appcolors.kgreyColor,
         ),
         onPressed: onPressed,
       ),

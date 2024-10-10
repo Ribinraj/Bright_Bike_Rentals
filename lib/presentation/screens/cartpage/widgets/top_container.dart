@@ -1,5 +1,3 @@
-
-
 // import 'package:bright_bike_rentals/core/colors.dart';
 // import 'package:bright_bike_rentals/core/constants.dart';
 // import 'package:bright_bike_rentals/core/responsive_utils.dart';
@@ -132,7 +130,6 @@ import 'package:flutter/material.dart';
 
 ////
 
-
 class Topcontainer extends StatefulWidget {
   const Topcontainer({
     super.key,
@@ -177,7 +174,7 @@ class _TopcontainerState extends State<Topcontainer> {
                   padding: EdgeInsets.only(bottom: ResponsiveUtils.wp(4)),
                   child: Container(
                     padding: const EdgeInsets.all(8),
-                    height: 105,
+                    // height: ResponsiveUtils.hp(11.5),
                     decoration: BoxDecoration(
                       color: Appcolors.kwhiteColor,
                       border: Border.all(
@@ -198,7 +195,7 @@ class _TopcontainerState extends State<Topcontainer> {
                       padding: EdgeInsets.all(ResponsiveUtils.wp(1)),
                       child: Row(
                         children: [
-                           Column(
+                          Column(
                             children: [
                               SizedBox(
                                 width: ResponsiveUtils.wp(12),
@@ -260,13 +257,14 @@ class _TopcontainerState extends State<Topcontainer> {
                               ResponsiveSizedBox.height10,
                               // Counter directly integrated here
                               SizedBox(
-                                width: 65,
+                                width: ResponsiveUtils.wp(15),
                                 child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
                                   children: [
                                     Container(
-                                      width: 18,
-                                      height: 18,
+                                      width: ResponsiveUtils.wp(5),
+                                      height: ResponsiveUtils.hp(2.5),
                                       decoration: const BoxDecoration(
                                         shape: BoxShape.circle,
                                         color: Appcolors.kyellowColor,
@@ -276,10 +274,10 @@ class _TopcontainerState extends State<Topcontainer> {
                                         onPressed: () => decrement(index),
                                         iconSize: 13,
                                         padding: EdgeInsets.zero,
-                                        constraints: const BoxConstraints(
-                                          minHeight: 20,
-                                          minWidth: 20,
-                                        ),
+                                        // constraints: const BoxConstraints(
+                                        //   minHeight: 20,
+                                        //   minWidth: 20,
+                                        // ),
                                         splashRadius: 20,
                                       ),
                                     ),
@@ -287,8 +285,8 @@ class _TopcontainerState extends State<Topcontainer> {
                                       counts[index].toString().padLeft(2, '0'),
                                     ),
                                     Container(
-                                      width: 18,
-                                      height: 18,
+                                      width: ResponsiveUtils.wp(5),
+                                      height: ResponsiveUtils.hp(2.5),
                                       decoration: const BoxDecoration(
                                         shape: BoxShape.circle,
                                         color: Appcolors.kyellowColor,
@@ -298,10 +296,10 @@ class _TopcontainerState extends State<Topcontainer> {
                                         onPressed: () => increment(index),
                                         iconSize: 13,
                                         padding: EdgeInsets.zero,
-                                        constraints: const BoxConstraints(
-                                          minHeight: 20,
-                                          minWidth: 20,
-                                        ),
+                                        // constraints: const BoxConstraints(
+                                        //     // minHeight: 20,
+                                        //     // minWidth: 20,
+                                        //     ),
                                         splashRadius: 20,
                                       ),
                                     ),

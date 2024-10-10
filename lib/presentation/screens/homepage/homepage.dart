@@ -65,17 +65,24 @@ class ScreenHomepage extends StatelessWidget {
                       Container(
                         margin: EdgeInsets.only(bottom: ResponsiveUtils.wp(3)),
                         width: double.infinity,
-                        height: ResponsiveUtils.hp(15),
+                        // height: ResponsiveUtils.hp(15),
                         decoration: BoxDecoration(
-                          color: Appcolors.kwhiteColor,
+                          gradient: LinearGradient(
+                            colors: [
+                              Appcolors.kbackgroundgrey,
+                              Appcolors.kwhiteColor,
+                            ],
+                            begin: Alignment.topLeft, // Gradient starting point
+                            end: Alignment.bottomRight, // Gradient ending point
+                          ),
                           border: Border.all(
-                            color: Appcolors.kyellowColor,
-                            width: 1.5,
+                            color: Appcolors.kyellowColor.withOpacity(.6),
+                            width: 1.3,
                           ),
                           borderRadius: BorderRadiusStyles.kradius10(),
                           boxShadow: [
                             BoxShadow(
-                              color: Appcolors.kblackColor.withOpacity(0.1),
+                              color: Appcolors.kgreyColor.withOpacity(0.2),
                               offset: const Offset(0, 4),
                               blurRadius: 2,
                               spreadRadius: 0,
@@ -167,7 +174,7 @@ class ScreenHomepage extends StatelessWidget {
         bottom: ResponsiveUtils.hp(7),
         right: ResponsiveUtils.wp(1),
         child: SizedBox(
-          width: ResponsiveUtils.wp(33),
+          width: ResponsiveUtils.wp(31),
           height: ResponsiveUtils.hp(4.5),
           child: FloatingActionButton(
             shape: RoundedRectangleBorder(
@@ -178,19 +185,20 @@ class ScreenHomepage extends StatelessWidget {
             elevation: 0,
             focusElevation: 0,
             child: Padding(
-              padding: EdgeInsets.all(ResponsiveUtils.wp(1.5)),
+              padding: EdgeInsets.all(ResponsiveUtils.wp(2)),
               child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                // mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Image.asset(
                     'assets/icons/whatsapp.png',
                     width: ResponsiveUtils.wp(7),
                     height: ResponsiveUtils.hp(3.5),
                   ),
-                  TextStyles.body(
+                  ResponsiveSizedBox.width5,
+                  TextStyles.caption(
                       text: 'Chat with us',
                       color: Appcolors.kwhiteColor,
-                      weight: FontWeight.w500),
+                      weight: FontWeight.bold),
                 ],
               ),
             ),

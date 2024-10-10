@@ -1,5 +1,3 @@
-
-
 import 'package:bright_bike_rentals/core/colors.dart';
 import 'package:bright_bike_rentals/core/constants.dart';
 import 'package:bright_bike_rentals/core/responsive_utils.dart';
@@ -7,7 +5,10 @@ import 'package:bright_bike_rentals/presentation/screens/cartpage/widgets/cart_t
 import 'package:bright_bike_rentals/presentation/screens/cartpage/widgets/payment_iconbutton.dart';
 import 'package:bright_bike_rentals/presentation/screens/cartpage/widgets/tick_iconbutton.dart';
 import 'package:bright_bike_rentals/presentation/screens/cartpage/widgets/top_container.dart';
+import 'package:bright_bike_rentals/presentation/screens/payment_failiurepage/payment_failiure.dart';
+import 'package:bright_bike_rentals/presentation/screens/paymnet_successpage/payment_successpage.dart';
 import 'package:bright_bike_rentals/presentation/widgets/custom_appbar.dart';
+import 'package:bright_bike_rentals/presentation/widgets/custom_navigator.dart';
 import 'package:bright_bike_rentals/presentation/widgets/dash_devider.dart';
 import 'package:flutter/material.dart';
 
@@ -22,6 +23,7 @@ class _ScreenCartpageState extends State<ScreenCartpage> {
   bool isButton1Clicked = false;
   bool isButton2Clicked = false;
   bool isButtonclicked = false;
+  int selectedButtonIndex = -1;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -41,35 +43,33 @@ class _ScreenCartpageState extends State<ScreenCartpage> {
                 borderRadius: BorderRadiusStyles.kradius20(),
               ),
               child: Padding(
-                padding: const EdgeInsets.all(15),
+                padding: EdgeInsets.all(ResponsiveUtils.wp(4)),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     ResponsiveSizedBox.height10,
-                    const Text(
-                      'Payment Options',
-                      style:
-                          TextStyle(fontSize: 17, fontWeight: FontWeight.w700),
+                    TextStyles.subheadline(
+                      text: 'Payment Options',
                     ),
                     ResponsiveSizedBox.height10,
                     Row(
                       children: [
                         PaymentIconButton(
-                            isClicked: isButton1Clicked,
-                            onPressed: () {
-                              setState(() {
-                                isButton1Clicked = !isButton1Clicked;
-                              });
-                            }),
-                        ResponsiveSizedBox.height10,
-                        const Text(
-                          'Full payment',
-                          style: TextStyle(fontSize: 15),
+                          isClicked: selectedButtonIndex == 0,
+                          onPressed: () {
+                            setState(() {
+                              selectedButtonIndex =
+                                  (selectedButtonIndex == 0) ? -1 : 0;
+                            });
+                          },
+                        ),
+                        ResponsiveSizedBox.width10,
+                        TextStyles.body(
+                          text: 'Full payment',
                         ),
                         const Spacer(),
-                        const Text(
-                          '\u20B9 2200.00',
-                          style: TextStyle(fontSize: 15),
+                        TextStyles.body(
+                          text: '\u20B9 2200.00',
                         )
                       ],
                     ),
@@ -77,21 +77,21 @@ class _ScreenCartpageState extends State<ScreenCartpage> {
                     Row(
                       children: [
                         PaymentIconButton(
-                            isClicked: isButton2Clicked,
-                            onPressed: () {
-                              setState(() {
-                                isButton2Clicked = !isButton2Clicked;
-                              });
-                            }),
+                          isClicked: selectedButtonIndex == 1,
+                          onPressed: () {
+                            setState(() {
+                              selectedButtonIndex =
+                                  (selectedButtonIndex == 1) ? -1 : 1;
+                            });
+                          },
+                        ),
                         ResponsiveSizedBox.width10,
-                        const Text(
-                          'Pay 20% Advance',
-                          style: TextStyle(fontSize: 15),
+                        TextStyles.body(
+                          text: 'Pay 20% Advance',
                         ),
                         const Spacer(),
-                        const Text(
-                          '\u20B9 440.00',
-                          style: TextStyle(fontSize: 15),
+                        TextStyles.body(
+                          text: '\u20B9 440.00',
                         )
                       ],
                     ),
@@ -102,11 +102,13 @@ class _ScreenCartpageState extends State<ScreenCartpage> {
                       dashWidth: 5,
                       dashSpace: 3,
                     ),
-                    const Center(
+                    Center(
                       child: Padding(
-                        padding: EdgeInsets.all(10),
-                        child: Text(
-                            'Rs.1000 refundable security deposit / bike \nto be paid while boarding the Bike / Scooter.'),
+                        padding: EdgeInsets.all(ResponsiveUtils.wp(4)),
+                        child: const ResponsiveText(
+                          'Rs.1000 refundable security deposit / bike \nto be paid while boarding the Bike / Scooter.',
+                          sizeFactor: 0.9,
+                        ),
                       ),
                     ),
                     const DashedDivider(
@@ -118,7 +120,7 @@ class _ScreenCartpageState extends State<ScreenCartpage> {
                     ResponsiveSizedBox.height10,
                     Center(
                       child: Padding(
-                        padding: const EdgeInsets.all(10),
+                        padding: EdgeInsets.all(ResponsiveUtils.wp(3)),
                         child: Row(
                           children: [
                             TickIconButton(
@@ -129,8 +131,10 @@ class _ScreenCartpageState extends State<ScreenCartpage> {
                                   });
                                 }),
                             ResponsiveSizedBox.width10,
-                            const Text(
-                                'Early Morning Pickup will be charged at \n\u20B9200 / Bike'),
+                            const ResponsiveText(
+                              'Early Morning Pickup will be charged at \n\u20B9200 / Bike',
+                              sizeFactor: 0.9,
+                            ),
                           ],
                         ),
                       ),
@@ -142,17 +146,22 @@ class _ScreenCartpageState extends State<ScreenCartpage> {
                       dashSpace: 3,
                     ),
                     ResponsiveSizedBox.height30,
-                    const Text(
-                      '\u20B9 2200',
-                      style:
-                          TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                    GestureDetector(
+                      onTap: () {
+                        navigatePush(context, PaymentFailurePage());
+                      },
+                      child: TextStyles.headline(
+                        text: '\u20B9 2200',
+                      ),
                     ),
                     ResponsiveSizedBox.height20,
                     SizedBox(
                       width: double.infinity,
-                      height: 45,
+                      height: ResponsiveUtils.sp(10),
                       child: ElevatedButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          navigatePush(context, PaymentSuccessPage());
+                        },
                         style: ElevatedButton.styleFrom(
                           backgroundColor: Appcolors.kyellowColor,
                           shape: RoundedRectangleBorder(

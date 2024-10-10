@@ -197,3 +197,5 @@ class ResponsiveSizedBox {
     return SizedBox(width: ResponsiveUtils.wp(percentage));
   }
 }
+//////////---------------//////////////
+const animation='assets/icons/Animation - 1728414218932.json';

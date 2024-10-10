@@ -1,16 +1,25 @@
 import 'package:bright_bike_rentals/core/colors.dart';
 import 'package:bright_bike_rentals/core/constants.dart';
 import 'package:bright_bike_rentals/core/responsive_utils.dart';
+import 'package:carousel_slider/carousel_slider.dart';
 
 import 'package:flutter/material.dart';
 
-class Imagecontainer extends StatelessWidget {
+class Imagecontainer extends StatefulWidget {
   const Imagecontainer({
     super.key,
-    
   });
 
+  @override
+  State<Imagecontainer> createState() => _ImagecontainerState();
+}
 
+class _ImagecontainerState extends State<Imagecontainer> {
+  List caroselimages = [
+    'assets/images/man-rides-dirt-bike-dirt-road-sunset.jpg',
+    'assets/images/man-riding-motorcycle-road-with-words-word-side.jpg',
+    'assets/images/moto-food-delivery-man-rides-motor-bike-with-thermal-backpack-food-deliver-service-generative-ai.jpg',
+  ];
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -20,15 +29,36 @@ class Imagecontainer extends StatelessWidget {
         TextStyles.headline(
             text: 'Find your ride', color: Appcolors.kgreyColor),
         ResponsiveSizedBox.height10,
-        ClipRRect(
-          borderRadius: BorderRadiusStyles.kradius20(),
-          child: Image.asset(
-            'assets/images/man-rides-dirt-bike-dirt-road-sunset.jpg',
-            width: double.infinity,
-            height: ResponsiveUtils.hp(23),
-            fit: BoxFit.cover,
-          ),
+        CarouselSlider.builder(
+          itemCount: caroselimages.length,
+          options: CarouselOptions(
+              autoPlay: true,
+              enlargeCenterPage: false,
+              viewportFraction: 1,
+              pageSnapping: true,
+              autoPlayCurve: TreeSliver.defaultAnimationCurve,
+              autoPlayAnimationDuration: const Duration(seconds: 1)),
+          itemBuilder: (context, itemIndex, pageViewIndex) {
+            return ClipRRect(
+              borderRadius: BorderRadiusStyles.kradius20(),
+              child: Image.asset(
+                caroselimages[itemIndex],
+                width: double.infinity,
+                height: ResponsiveUtils.hp(23),
+                fit: BoxFit.cover,
+              ),
+            );
+          },
         ),
+        // ClipRRect(
+        //   borderRadius: BorderRadiusStyles.kradius20(),
+        //   child: Image.asset(
+        //     'assets/images/man-rides-dirt-bike-dirt-road-sunset.jpg',
+        //     width: double.infinity,
+        //     height: ResponsiveUtils.hp(23),
+        //     fit: BoxFit.cover,
+        //   ),
+        // ),
         ResponsiveSizedBox.height10,
         TextStyles.headline(text: 'Our Fleet'),
         ResponsiveSizedBox.height10,
