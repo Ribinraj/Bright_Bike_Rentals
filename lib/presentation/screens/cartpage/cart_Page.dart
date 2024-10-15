@@ -1,12 +1,13 @@
 import 'package:bright_bike_rentals/core/colors.dart';
 import 'package:bright_bike_rentals/core/constants.dart';
 import 'package:bright_bike_rentals/core/responsive_utils.dart';
+import 'package:bright_bike_rentals/presentation/screens/Checkout_page/checkout_page.dart';
 import 'package:bright_bike_rentals/presentation/screens/cartpage/widgets/cart_titlewidget.dart';
 import 'package:bright_bike_rentals/presentation/screens/cartpage/widgets/payment_iconbutton.dart';
 import 'package:bright_bike_rentals/presentation/screens/cartpage/widgets/tick_iconbutton.dart';
 import 'package:bright_bike_rentals/presentation/screens/cartpage/widgets/top_container.dart';
 import 'package:bright_bike_rentals/presentation/screens/payment_failiurepage/payment_failiure.dart';
-import 'package:bright_bike_rentals/presentation/screens/paymnet_successpage/payment_successpage.dart';
+
 import 'package:bright_bike_rentals/presentation/widgets/custom_appbar.dart';
 import 'package:bright_bike_rentals/presentation/widgets/custom_navigator.dart';
 import 'package:bright_bike_rentals/presentation/widgets/dash_devider.dart';
@@ -23,7 +24,7 @@ class _ScreenCartpageState extends State<ScreenCartpage> {
   bool isButton1Clicked = false;
   bool isButton2Clicked = false;
   bool isButtonclicked = false;
-  int selectedButtonIndex = -1;
+  int selectedButtonIndex = 0;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -59,7 +60,8 @@ class _ScreenCartpageState extends State<ScreenCartpage> {
                           onPressed: () {
                             setState(() {
                               selectedButtonIndex =
-                                  (selectedButtonIndex == 0) ? -1 : 0;
+                                  // (selectedButtonIndex == 0) ? -1 : 0;
+                                  selectedButtonIndex = 0;
                             });
                           },
                         ),
@@ -81,7 +83,8 @@ class _ScreenCartpageState extends State<ScreenCartpage> {
                           onPressed: () {
                             setState(() {
                               selectedButtonIndex =
-                                  (selectedButtonIndex == 1) ? -1 : 1;
+                                  //(selectedButtonIndex == 1) ? -1 : 1;
+                                  selectedButtonIndex = 1;
                             });
                           },
                         ),
@@ -148,7 +151,7 @@ class _ScreenCartpageState extends State<ScreenCartpage> {
                     ResponsiveSizedBox.height30,
                     GestureDetector(
                       onTap: () {
-                        navigatePush(context, PaymentFailurePage());
+                        navigatePush(context, const PaymentFailurePage());
                       },
                       child: TextStyles.headline(
                         text: '\u20B9 2200',
@@ -160,7 +163,7 @@ class _ScreenCartpageState extends State<ScreenCartpage> {
                       height: ResponsiveUtils.sp(10),
                       child: ElevatedButton(
                         onPressed: () {
-                          navigatePush(context, PaymentSuccessPage());
+                          navigatePush(context, const ScreenCheckoutPage());
                         },
                         style: ElevatedButton.styleFrom(
                           backgroundColor: Appcolors.kyellowColor,

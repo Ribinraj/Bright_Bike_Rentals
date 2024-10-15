@@ -1,9 +1,11 @@
+
 import 'package:bright_bike_rentals/presentation/blocs/bottom_navigationbar/bottom_navigationbar_bloc.dart';
 import 'package:bright_bike_rentals/presentation/screens/Mainpage/widgets/customnav.dart';
-import 'package:bright_bike_rentals/presentation/screens/accountpage/accountpage.dart';
+
 import 'package:bright_bike_rentals/presentation/screens/bookingpage/bookingpage.dart';
 import 'package:bright_bike_rentals/presentation/screens/cartpage/cart_Page.dart';
 import 'package:bright_bike_rentals/presentation/screens/homepage/homepage.dart';
+import 'package:bright_bike_rentals/presentation/screens/network_connectivitypage.dart/connectivity_page.dart';
 import 'package:bright_bike_rentals/presentation/screens/profile_page/profile_page.dart';
 import 'package:bright_bike_rentals/presentation/screens/searchpage/search_page.dart';
 
@@ -37,16 +39,18 @@ class ScreenMainPage extends StatelessWidget {
     const ScreenSearchPage(),
     const ScreenCartpage(),
     const ScreenBookingPage(),
-    ProfilePage()
+    const ProfilePage()
   ];
 
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<BottomNavigationbarBloc, BottomNavigationbarState>(
       builder: (context, state) {
-        return Scaffold(
-          body: _pages[state.currentPageIndex],
-          bottomNavigationBar: const BottomNavigationWidget(),
+        return ConnectivityAwareWidget(
+          child: Scaffold(
+            body: _pages[state.currentPageIndex],
+            bottomNavigationBar: const BottomNavigationWidget(),
+          ),
         );
       },
     );

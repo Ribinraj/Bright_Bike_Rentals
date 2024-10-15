@@ -1,6 +1,7 @@
 import 'package:bright_bike_rentals/core/colors.dart';
 import 'package:bright_bike_rentals/core/constants.dart';
 import 'package:bright_bike_rentals/core/responsive_utils.dart';
+import 'package:bright_bike_rentals/presentation/widgets/navigate_mainpage.dart';
 import 'package:flutter/material.dart';
 
 class CartWidget extends StatelessWidget {
@@ -14,12 +15,13 @@ class CartWidget extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         TextStyles.headline(text: 'cart'),
-    
         SizedBox(
           height: ResponsiveUtils.hp(3.5),
           width: ResponsiveUtils.wp(38),
           child: ElevatedButton(
-            onPressed: () {},
+            onPressed: () {
+              navigateToMainPage(context, 1);
+            },
             style: ElevatedButton.styleFrom(
               backgroundColor: Appcolors.kblackColor,
               shape: RoundedRectangleBorder(
@@ -37,7 +39,6 @@ class CartWidget extends StatelessWidget {
                   color: Appcolors.kwhiteColor,
                   weight: FontWeight.w600,
                 )
-
               ],
             ),
           ),

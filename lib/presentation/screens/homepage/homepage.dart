@@ -1,11 +1,12 @@
 import 'package:bright_bike_rentals/core/colors.dart';
 import 'package:bright_bike_rentals/core/constants.dart';
 import 'package:bright_bike_rentals/core/responsive_utils.dart';
+
 import 'package:bright_bike_rentals/presentation/screens/homepage/widgets/custom_imagecontainer.dart';
 import 'package:bright_bike_rentals/presentation/widgets/custom_appbar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:iconsax/iconsax.dart';
+
 import 'package:url_launcher/url_launcher.dart';
 
 class ScreenHomepage extends StatelessWidget {

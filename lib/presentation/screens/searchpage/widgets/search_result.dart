@@ -139,6 +139,7 @@ import 'dart:developer';
 
 import 'package:bright_bike_rentals/presentation/screens/searchpage/widgets/date_time_selection_widget.dart';
 import 'package:bright_bike_rentals/presentation/widgets/custom_elevatedbutton.dart';
+import 'package:bright_bike_rentals/presentation/widgets/navigate_mainpage.dart';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -194,7 +195,9 @@ class _ScreenSearchResultState extends State<ScreenSearchResult> {
             collapsedHeight: 70,
             floating: false,
             pinned: true,
-            backgroundColor: Appcolors.kbackgroundgrey,
+            backgroundColor: _isCollapsed
+                ? Appcolors.kyellowColor
+                : Appcolors.kbackgroundgrey,
             elevation: 0,
             flexibleSpace: ClipRRect(
               borderRadius:
@@ -221,8 +224,8 @@ class _ScreenSearchResultState extends State<ScreenSearchResult> {
               ),
             ),
             leading: IconButton(
-              icon: Icon(CupertinoIcons.chevron_back,
-                  size: 35, color: _isCollapsed ? Colors.black : Colors.white),
+              icon: const Icon(CupertinoIcons.chevron_back,
+                  size: 35, color: Colors.white),
               onPressed: () => Navigator.of(context).pop(),
             ),
             title: _isCollapsed ? _buildDateTimeInfo(isCollapsed: true) : null,
@@ -291,8 +294,13 @@ class _ScreenSearchResultState extends State<ScreenSearchResult> {
                                   text: '\u20B9 500',
                                 ),
                                 const Spacer(),
-                                TextStyles.subheadline(
-                                  text: index == 2 ? 'Sold Out' : 'Book Now',
+                                GestureDetector(
+                                  onTap: () {
+                                    navigateToMainPage(context, 2);
+                                  },
+                                  child: TextStyles.subheadline(
+                                    text: index == 2 ? 'Sold Out' : 'Book Now',
+                                  ),
                                 ),
                               ],
                             ),
@@ -322,49 +330,87 @@ class _ScreenSearchResultState extends State<ScreenSearchResult> {
         _showTopSheet(context);
       },
       child: Container(
-        width: isCollapsed ? double.infinity : null,
-        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+        width: isCollapsed ? ResponsiveUtils.wp(70) : null,
+        padding: EdgeInsets.symmetric(
+            horizontal: isCollapsed ? 10 : 16, vertical: isCollapsed ? 6 : 8),
         decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.circular(8),
         ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              'Pick-up',
-              style: TextStyle(
-                color: Appcolors.kgreyColor,
-                fontWeight: FontWeight.w600,
-                fontSize: isCollapsed ? 10 : 14,
+        child: isCollapsed
+            ? Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Row(
+                    children: [
+                      Text(
+                        'Pick-up',
+                        style: TextStyle(
+                          color: Appcolors.kgreyColor,
+                          fontWeight: FontWeight.w600,
+                          fontSize: isCollapsed ? 10 : 14,
+                        ),
+                      ),
+                      ResponsiveSizedBox.width30,
+                      Text('26 March 2024 09:00 AM', style: style),
+                    ],
+                  ),
+                  SizedBox(
+                      width: ResponsiveUtils.wp(40), child: const Divider()),
+                  Row(
+                    children: [
+                      Text(
+                        'Drop off',
+                        style: TextStyle(
+                          color: Appcolors.kgreyColor,
+                          fontWeight: FontWeight.w600,
+                          fontSize: isCollapsed ? 10 : 14,
+                        ),
+                      ),
+                      ResponsiveSizedBox.width30,
+                      Text('26 March 2024 09:00 AM', style: style),
+                    ],
+                  )
+                ],
+              )
+            : Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    'Pick-up',
+                    style: TextStyle(
+                      color: Appcolors.kgreyColor,
+                      fontWeight: FontWeight.w600,
+                      fontSize: isCollapsed ? 10 : 14,
+                    ),
+                  ),
+                  Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      ResponsiveSizedBox.width30,
+                      Text('26 March 2024 09:00 AM', style: style),
+                    ],
+                  ),
+                  // if (!isCollapsed)
+                  SizedBox(
+                      width: ResponsiveUtils.wp(60), child: const Divider()),
+                  Text(
+                    'Drop off',
+                    style: TextStyle(
+                      color: Appcolors.kgreyColor,
+                      fontWeight: FontWeight.w600,
+                      fontSize: isCollapsed ? 10 : 14,
+                    ),
+                  ),
+                  Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      ResponsiveSizedBox.width30,
+                      Text('26 March 2024 09:00 AM', style: style),
+                    ],
+                  ),
+                ],
               ),
-            ),
-            Row(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                ResponsiveSizedBox.width30,
-                Text('26 March 2024 09:00 AM', style: style),
-              ],
-            ),
-            if (!isCollapsed)
-              SizedBox(width: ResponsiveUtils.wp(60), child: const Divider()),
-            Text(
-              'Drop off',
-              style: TextStyle(
-                color: Appcolors.kgreyColor,
-                fontWeight: FontWeight.w600,
-                fontSize: isCollapsed ? 10 : 14,
-              ),
-            ),
-            Row(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                ResponsiveSizedBox.width30,
-                Text('26 March 2024 09:00 AM', style: style),
-              ],
-            ),
-          ],
-        ),
       ),
     );
   }

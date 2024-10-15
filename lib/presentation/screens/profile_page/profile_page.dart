@@ -2,8 +2,10 @@ import 'package:bright_bike_rentals/core/colors.dart';
 import 'package:bright_bike_rentals/core/constants.dart';
 
 import 'package:bright_bike_rentals/core/images.dart';
+import 'package:bright_bike_rentals/presentation/screens/edit_profilepage/edit_profilepage.dart';
 
 import 'package:bright_bike_rentals/presentation/widgets/custom_elevatedbutton.dart';
+import 'package:bright_bike_rentals/presentation/widgets/custom_navigator.dart';
 import 'package:flutter/material.dart';
 
 class ProfilePage extends StatelessWidget {
@@ -15,26 +17,33 @@ class ProfilePage extends StatelessWidget {
       backgroundColor: Appcolors.kwhiteColor,
       body: SingleChildScrollView(
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             _buildTopSection(),
-            Container(
-              margin: const EdgeInsets.all(30),
-              padding: const EdgeInsets.only(bottom: 60, top: 20),
-              decoration: BoxDecoration(
-                color: Appcolors.kbackgroundgrey.withOpacity(.7),
-                borderRadius: BorderRadius.circular(20),
-                border: Border.all(
-                    width: 1, color: Appcolors.kgreyColor.withOpacity(.5)),
-              ),
+            Padding(
+              padding: const EdgeInsets.all(15),
               child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  _buildBottomSection(),
-                  Padding(
-                    padding: const EdgeInsets.all(20),
-                    child: CustomElevatedButton(
-                      onpress: () {},
-                      text: 'Edit Profile',
-                    ),
+                  ResponsiveSizedBox.height30,
+                  _buildInfoCard('Mobile', '9946802969', Icons.phone),
+                  ResponsiveSizedBox.height20,
+                  _buildInfoCard('Email', 'ribinrajop', Icons.email),
+                  ResponsiveSizedBox.height20,
+                  _buildInfoCard('Driving License', 'NBR12456', Icons.book),
+                  ResponsiveSizedBox.height20,
+                  _buildInfoCard(
+                      'Adress',
+                      'Oottupurath house, amarambalalam south po',
+                      Icons.location_city),
+                  ResponsiveSizedBox.height20,
+                  _buildInfoCard('State', 'Kerala', Icons.location_on),
+                  ResponsiveSizedBox.height20,
+                  CustomElevatedButton(
+                    onpress: () {
+                      navigatePush(context, const ScreenEditProfilePage());
+                    },
+                    text: 'Edit Profile',
                   )
                 ],
               ),
@@ -59,12 +68,12 @@ class ProfilePage extends StatelessWidget {
         child: Column(
           children: [
             Container(
-              margin: const EdgeInsets.only(top: 50, bottom: 20),
+              margin: const EdgeInsets.only(top: 40, bottom: 10),
               child: const CircleAvatar(
-                radius: 80,
+                radius: 65,
                 backgroundColor: Colors.white,
                 child: CircleAvatar(
-                  radius: 75,
+                  radius: 60,
                   backgroundImage: AssetImage(AppImages.logo),
                 ),
               ),
@@ -72,35 +81,21 @@ class ProfilePage extends StatelessWidget {
             const Text(
               'Ribinraj op',
               style: TextStyle(
-                fontSize: 28,
+                fontSize: 23,
                 fontWeight: FontWeight.bold,
                 color: Appcolors.kblackColor,
               ),
             ),
-            ResponsiveSizedBox.height30,
+            ResponsiveSizedBox.height20
           ],
         ),
       ),
     );
   }
 
-  Widget _buildBottomSection() {
-    return Container(
-      padding: const EdgeInsets.all(20),
-      child: Column(
-        children: [
-          const SizedBox(height: 30),
-          _buildInfoCard('Mobile', '9946802969', Icons.phone),
-          const SizedBox(height: 20),
-          _buildInfoCard('Email', 'ribinrajop', Icons.email),
-        ],
-      ),
-    );
-  }
-
   Widget _buildInfoCard(String title, String content, IconData icon) {
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
+      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(20),
@@ -114,6 +109,7 @@ class ProfilePage extends StatelessWidget {
         ],
       ),
       child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Container(
             padding: const EdgeInsets.all(10),
@@ -121,29 +117,33 @@ class ProfilePage extends StatelessWidget {
               color: Appcolors.kyellowColor,
               shape: BoxShape.circle,
             ),
-            child: Icon(icon, color:Appcolors.kblackColor),
+            child: Icon(icon, color: Appcolors.kblackColor),
           ),
           const SizedBox(width: 20),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                title,
-                style: TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.grey[600],
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  title,
+                  style: TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.grey[600],
+                  ),
                 ),
-              ),
-              const SizedBox(height: 5),
-              Text(
-                content,
-                style: const TextStyle(
-                  fontSize: 18,
-                  color: Colors.black,
+                const SizedBox(height: 5),
+                Text(
+                  content,
+                  style: const TextStyle(
+                    fontSize: 18,
+                    color: Colors.black,
+                  ),
+                  maxLines: 3,
+                  overflow: TextOverflow.ellipsis,
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ],
       ),

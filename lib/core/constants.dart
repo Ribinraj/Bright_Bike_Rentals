@@ -49,7 +49,7 @@ class TextStyles {
       {String? text, FontWeight? weight, Color? color}) {
     return ResponsiveText(
       text ?? '',
-      sizeFactor: 1.22, 
+      sizeFactor: 1.22,
       weight: weight ?? FontWeight.w600,
       color: color,
     );
@@ -197,5 +197,7 @@ class ResponsiveSizedBox {
     return SizedBox(width: ResponsiveUtils.wp(percentage));
   }
 }
+
 //////////---------------//////////////
-const animation='assets/icons/Animation - 1728414218932.json';
+const animation = 'assets/icons/Animation - 1728414218932.json';
+const internetanimation = 'assets/icons/Animation - 1728979722770.json';
