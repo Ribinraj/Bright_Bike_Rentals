@@ -1,5 +1,7 @@
 import 'package:bright_bike_rentals/core/constants.dart';
 import 'package:bright_bike_rentals/core/images.dart';
+import 'package:bright_bike_rentals/presentation/screens/notificationpage/notificationpage.dart';
+import 'package:bright_bike_rentals/presentation/widgets/custom_navigator.dart';
 import 'package:flutter/material.dart';
 import 'package:bright_bike_rentals/core/responsive_utils.dart';
 import 'package:bright_bike_rentals/presentation/widgets/custom_callingbutton.dart';
@@ -22,7 +24,14 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
         Padding(
             padding: EdgeInsets.symmetric(horizontal: ResponsiveUtils.wp(1)),
             child: const PhoneCallButton()),
-        const SizedBox(width: 15)
+        IconButton(
+            onPressed: () {
+              navigatePush(context, NotificationPage());
+            },
+            icon: Icon(
+              Icons.notifications,
+              color: Appcolors.kblackColor,
+            ))
       ],
     );
   }

@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "577480287388",
+    "project_id": "bright-bike-rentals",
+    "storage_bucket": "bright-bike-rentals.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:577480287388:android:d84ba23420246e97083959",
+        "android_client_info": {
+          "package_name": "com.crisant.bright_bike_rentals"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBlDAGq5iG_Drf5XGoMK57qN7cx2subDDc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

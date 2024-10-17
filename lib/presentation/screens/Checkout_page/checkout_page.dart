@@ -38,7 +38,7 @@ class _ScreenCheckoutPageState extends State<ScreenCheckoutPage> {
         margin: const EdgeInsets.only(top: 20),
         decoration: const BoxDecoration(
             borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(40), topRight: Radius.circular(40)),
+                topLeft: Radius.circular(30), topRight: Radius.circular(30)),
             color: Appcolors.kwhiteColor),
         child: ListView(
           padding: const EdgeInsets.all(15),

@@ -24,70 +24,67 @@ class _ScreenEditProfilePageState extends State<ScreenEditProfilePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Appcolors.kbackgroundgrey,
-      appBar: PreferredSize(
-        preferredSize: const Size.fromHeight(70),
-        child: ClipRRect(
-          borderRadius: const BorderRadius.vertical(
-            bottom: Radius.circular(30.0),
-          ),
-          child: AppBar(
-            leading: IconButton(
-                onPressed: () {
-                  Navigator.of(context).pop();
-                },
-                icon: const Icon(
-                  CupertinoIcons.chevron_back,
-                  size: 30,
-                )),
-            title: TextStyles.subheadline(text: 'Edit profile'),
-            backgroundColor: Appcolors.kyellowColor,
-            centerTitle: true,
-          ),
-        ),
+      backgroundColor: Appcolors.kyellowColor,
+      appBar: AppBar(
+        backgroundColor: Appcolors.kyellowColor,
+        title: TextStyles.headline(text: 'Edit Profile'),
+        centerTitle: true,
+        leading: IconButton(
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+            icon: const Icon(
+              CupertinoIcons.chevron_back,
+              size: 35,
+            )),
       ),
-      body: ListView(
-        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 30),
-        children: [
-          CustomEditingTextField(
-              title: 'Name',
-              icon: Icons.person,
-              controller: nameController,
-              hintText: 'Enter Name'),
-          ResponsiveSizedBox.height30,
-           CustomEditingTextField(
-              title: 'Email',
-              icon: Icons.email,
-              controller: emailController,
-              hintText: 'Enter Email Adress'),
-          ResponsiveSizedBox.height30,
-          CustomEditingTextField(
-              title: 'Driving License',
-              icon: Icons.book,
-              controller: drivingLicenseController,
-              hintText: 'Enter License number'),
-          ResponsiveSizedBox.height30,
-           CustomEditingTextField(
-              title: 'Adress',
-              icon: Icons.location_city,
-              controller: adressController,
-              hintText: 'Enter Adress'),
-          ResponsiveSizedBox.height30,
-          CustomEditingTextField(
-              title: 'State',
-              icon: Icons.location_on,
-              controller: stateController,
-              hintText: 'Enter State'),
-          ResponsiveSizedBox.height50,
-          CustomElevatedButton(
-              onpress: () {
-                navigateToMainPage(context, 4);
-              },
-              text: 'Update Profile')
-        ],
+      body: Container(
+        margin: const EdgeInsets.only(top: 10),
+        decoration: const BoxDecoration(
+            borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(30), topRight: Radius.circular(30)),
+            color: Appcolors.kwhiteColor),
+        child: ListView(
+          padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 30),
+          children: [
+            CustomEditingTextField(
+                title: 'Name',
+                icon: Icons.person,
+                controller: nameController,
+                hintText: 'Enter Name'),
+            ResponsiveSizedBox.height30,
+            CustomEditingTextField(
+                title: 'Email',
+                icon: Icons.email,
+                controller: emailController,
+                hintText: 'Enter Email Adress'),
+            ResponsiveSizedBox.height30,
+            CustomEditingTextField(
+                title: 'Driving License',
+                icon: Icons.book,
+                controller: drivingLicenseController,
+                hintText: 'Enter License number'),
+            ResponsiveSizedBox.height30,
+            CustomEditingTextField(
+                title: 'Adress',
+                icon: Icons.location_city,
+                controller: adressController,
+                hintText: 'Enter Adress'),
+            ResponsiveSizedBox.height30,
+            CustomEditingTextField(
+                title: 'State',
+                icon: Icons.location_on,
+                controller: stateController,
+                hintText: 'Enter State'),
+            ResponsiveSizedBox.height50,
+            CustomElevatedButton(
+                onpress: () {
+                  navigateToMainPage(context, 4);
+                },
+                text: 'Update Profile')
+          ],
+        ),
       ),
     );
   }
-
-  
 }
