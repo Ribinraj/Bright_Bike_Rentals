@@ -39,29 +39,22 @@ class _ImagecontainerState extends State<Imagecontainer> {
               autoPlayCurve: TreeSliver.defaultAnimationCurve,
               autoPlayAnimationDuration: const Duration(seconds: 1)),
           itemBuilder: (context, itemIndex, pageViewIndex) {
-            return ClipRRect(
-              borderRadius: BorderRadiusStyles.kradius20(),
-              child: Image.asset(
-                caroselimages[itemIndex],
-                width: double.infinity,
-                height: ResponsiveUtils.hp(23),
-                fit: BoxFit.cover,
+            return Padding(
+              padding: const EdgeInsets.all(2),
+              child: ClipRRect(
+                borderRadius: BorderRadiusStyles.kradius20(),
+                child: Image.asset(
+                  caroselimages[itemIndex],
+                  width: double.infinity,
+                  height: ResponsiveUtils.hp(23),
+                  fit: BoxFit.cover,
+                ),
               ),
             );
           },
         ),
-        // ClipRRect(
-        //   borderRadius: BorderRadiusStyles.kradius20(),
-        //   child: Image.asset(
-        //     'assets/images/man-rides-dirt-bike-dirt-road-sunset.jpg',
-        //     width: double.infinity,
-        //     height: ResponsiveUtils.hp(23),
-        //     fit: BoxFit.cover,
-        //   ),
-        // ),
-        ResponsiveSizedBox.height10,
-        TextStyles.headline(text: 'Our Fleet'),
-        ResponsiveSizedBox.height10,
+   
+      
       ],
     );
   }

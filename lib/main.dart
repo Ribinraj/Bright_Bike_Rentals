@@ -38,7 +38,6 @@
 
 //////////////////////////
 
-
 import 'dart:convert';
 
 import 'package:bright_bike_rentals/core/colors.dart';
@@ -47,6 +46,9 @@ import 'package:bright_bike_rentals/domain/controllers/push_notification_service
 import 'package:bright_bike_rentals/firebase_options.dart';
 import 'package:bright_bike_rentals/presentation/blocs/bottom_navigationbar/bottom_navigationbar_bloc.dart';
 import 'package:bright_bike_rentals/presentation/blocs/connectivity_bloc/connectivity_bloc.dart';
+import 'package:bright_bike_rentals/presentation/blocs/otp_bloc/otp_signin_bloc.dart';
+import 'package:bright_bike_rentals/presentation/blocs/password_login_blod.dart/password_login_bloc.dart';
+import 'package:bright_bike_rentals/presentation/blocs/signin/signin_bloc.dart';
 
 import 'package:bright_bike_rentals/presentation/screens/splash_page/splashpage.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -56,9 +58,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 //functions to listen to background changes
 Future _firebaseBackgroundMessage(RemoteMessage message) async {
- 
   if (message.notification != null) {
-   
     print("some notification received in background");
   }
 }
@@ -78,7 +78,6 @@ void main() async {
   FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) {
     if (message.notification != null) {
       print('background notification tapped');
-    
     }
   });
   //to handle forground notification
@@ -95,9 +94,7 @@ void main() async {
   //for handling terminated state\
   final RemoteMessage? message =
       await FirebaseMessaging.instance.getInitialMessage();
-  if (message != null) {
-  
-  }
+  if (message != null) {}
   runApp(const MyApp());
 }
 
@@ -114,6 +111,15 @@ class MyApp extends StatelessWidget {
         ),
         BlocProvider<ConnectivityBloc>(
           create: (context) => ConnectivityBloc()..add(CheckConnectivity()),
+        ),
+        BlocProvider<SigninBloc>(
+          create: (context) => SigninBloc(),
+        ),
+        BlocProvider<PasswordLoginBloc>(
+          create: (context) => PasswordLoginBloc(),
+        ),
+          BlocProvider<OtpSigninBloc>(
+          create: (context) => OtpSigninBloc(),
         ),
       ],
       child: MaterialApp(

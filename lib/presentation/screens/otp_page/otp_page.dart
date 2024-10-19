@@ -11,7 +11,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 class ScreenOtpPage extends StatefulWidget {
-  const ScreenOtpPage({super.key});
+  final String customerid;
+  const ScreenOtpPage({super.key, required this.customerid});
 
   @override
   State<ScreenOtpPage> createState() => _ScreenOtpPageState();

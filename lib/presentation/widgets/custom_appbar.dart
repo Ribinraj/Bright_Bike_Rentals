@@ -1,5 +1,6 @@
 import 'package:bright_bike_rentals/core/constants.dart';
 import 'package:bright_bike_rentals/core/images.dart';
+import 'package:bright_bike_rentals/presentation/screens/feedbackpage/feedbackpage.dart';
 import 'package:bright_bike_rentals/presentation/screens/notificationpage/notificationpage.dart';
 import 'package:bright_bike_rentals/presentation/widgets/custom_navigator.dart';
 import 'package:flutter/material.dart';
@@ -28,7 +29,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
             onPressed: () {
               navigatePush(context, NotificationPage());
             },
-            icon: Icon(
+            icon: const Icon(
               Icons.notifications,
               color: Appcolors.kblackColor,
             ))
@@ -73,10 +74,12 @@ class CustomDrawer extends StatelessWidget {
           ListTile(
             leading: const Icon(Icons.home_outlined),
             title: TextStyles.body(
-              text: 'Home',
+              text: 'Our feedback',
               weight: FontWeight.w600,
             ),
-            onTap: () {},
+            onTap: () {
+              navigatePush(context, const ScreenFeedbackPage());
+            },
           ),
           ListTile(
             leading: const Icon(Icons.people_outlined),

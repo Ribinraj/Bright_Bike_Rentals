@@ -70,6 +70,7 @@
 import 'package:bright_bike_rentals/core/colors.dart';
 import 'package:bright_bike_rentals/core/images.dart';
 import 'package:bright_bike_rentals/presentation/screens/Mainpage/mainpage.dart';
+import 'package:bright_bike_rentals/presentation/screens/signin_page/siginin_page.dart';
 import 'package:flutter/material.dart';
 
 class AdvancedSplashScreen extends StatefulWidget {
@@ -118,7 +119,7 @@ class _AdvancedSplashScreenState extends State<AdvancedSplashScreen>
     Future.delayed(const Duration(seconds: 5), () {
       // Navigate to your main screen here
       Navigator.of(context).pushReplacement(
-        MaterialPageRoute(builder: (context) => ScreenMainPage()),
+        MaterialPageRoute(builder: (context) => const ScreenSigninPage()),
       );
     });
   }

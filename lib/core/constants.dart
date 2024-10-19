@@ -201,3 +201,4 @@ class ResponsiveSizedBox {
 //////////---------------//////////////
 const animation = 'assets/icons/Animation - 1728414218932.json';
 const internetanimation = 'assets/icons/Animation - 1728979722770.json';
+const loadinganimation = 'assets/icons/Animation - 1728414419279.json';
