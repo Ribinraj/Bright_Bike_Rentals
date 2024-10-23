@@ -1,4 +1,5 @@
-import 'package:bright_bike_rentals/core/images.dart';
+import 'package:bright_bike_rentals/core/appconstants.dart';
+
 import 'package:flutter/material.dart';
 
 class ScreenAccountPage extends StatelessWidget {
@@ -7,19 +8,19 @@ class ScreenAccountPage extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.grey[200],
       appBar: AppBar(
-        title: Text('Profile'),
+        title: const Text('Profile'),
         backgroundColor: Colors.black,
       ),
       body: SingleChildScrollView(
         child: Column(
           children: [
-            SizedBox(height: 20),
-            CircleAvatar(
+            const SizedBox(height: 20),
+            const CircleAvatar(
               radius: 70,
-              backgroundImage: AssetImage(AppImages.logo),
+              backgroundImage: AssetImage(Appconstants.logo),
             ),
-            SizedBox(height: 20),
-            Text(
+            const SizedBox(height: 20),
+            const Text(
               'John Doe',
               style: TextStyle(
                 fontSize: 24,
@@ -27,7 +28,7 @@ class ScreenAccountPage extends StatelessWidget {
                 color: Colors.black,
               ),
             ),
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
             _buildInfoCard('Mobile', '+1 123 456 7890'),
             _buildInfoCard('Email', 'johndoe@example.com'),
           ],
@@ -38,8 +39,8 @@ class ScreenAccountPage extends StatelessWidget {
 
   Widget _buildInfoCard(String title, String content) {
     return Container(
-      margin: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
-      padding: EdgeInsets.all(15),
+      margin: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+      padding: const EdgeInsets.all(15),
       decoration: BoxDecoration(
         color: Colors.yellow[600],
         borderRadius: BorderRadius.circular(10),
@@ -48,7 +49,7 @@ class ScreenAccountPage extends StatelessWidget {
             color: Colors.grey.withOpacity(0.5),
             spreadRadius: 2,
             blurRadius: 5,
-            offset: Offset(0, 3),
+            offset: const Offset(0, 3),
           ),
         ],
       ),
@@ -58,13 +59,13 @@ class ScreenAccountPage extends StatelessWidget {
             title == 'Mobile' ? Icons.phone : Icons.email,
             color: Colors.black,
           ),
-          SizedBox(width: 10),
+          const SizedBox(width: 10),
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
                 title,
-                style: TextStyle(
+                style: const TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.bold,
                   color: Colors.black,
@@ -72,7 +73,7 @@ class ScreenAccountPage extends StatelessWidget {
               ),
               Text(
                 content,
-                style: TextStyle(
+                style: const TextStyle(
                   fontSize: 14,
                   color: Colors.black87,
                 ),

@@ -18,3 +18,11 @@ final class OtpSigninErrorState extends OtpSigninState {
 
   OtpSigninErrorState({required this.message});
 }
+
+final class VerifyOtpSuccessState extends OtpSigninState {}
+
+final class VerifyOtpErrorState extends OtpSigninState {
+  final String message;
+
+  VerifyOtpErrorState({required this.message});
+}

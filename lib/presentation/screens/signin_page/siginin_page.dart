@@ -1,8 +1,9 @@
 
 
+import 'package:bright_bike_rentals/core/appconstants.dart';
 import 'package:bright_bike_rentals/core/colors.dart';
 import 'package:bright_bike_rentals/core/constants.dart';
-import 'package:bright_bike_rentals/core/images.dart';
+
 import 'package:bright_bike_rentals/core/responsive_utils.dart';
 
 import 'package:bright_bike_rentals/presentation/blocs/signin/signin_bloc.dart';
@@ -53,7 +54,7 @@ class _ScreenSigninPageState extends State<ScreenSigninPage> {
                 width: ResponsiveUtils.wp(60),
                 height: ResponsiveUtils.hp(30),
                 child: Image.asset(
-                  AppImages.logo,
+                  Appconstants.logo,
                   fit: BoxFit.contain,
                 ),
               ),

@@ -1,4 +1,3 @@
-
 import 'package:bright_bike_rentals/presentation/blocs/bottom_navigationbar/bottom_navigationbar_bloc.dart';
 import 'package:bright_bike_rentals/presentation/screens/Mainpage/widgets/customnav.dart';
 

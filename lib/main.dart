@@ -46,8 +46,11 @@ import 'package:bright_bike_rentals/domain/controllers/push_notification_service
 import 'package:bright_bike_rentals/firebase_options.dart';
 import 'package:bright_bike_rentals/presentation/blocs/bottom_navigationbar/bottom_navigationbar_bloc.dart';
 import 'package:bright_bike_rentals/presentation/blocs/connectivity_bloc/connectivity_bloc.dart';
+import 'package:bright_bike_rentals/presentation/blocs/fetch_dashbord_databloc/fetch_dashbord_bloc.dart';
+import 'package:bright_bike_rentals/presentation/blocs/fetch_profilebloc.dart/fetch_profile_bloc.dart';
 import 'package:bright_bike_rentals/presentation/blocs/otp_bloc/otp_signin_bloc.dart';
 import 'package:bright_bike_rentals/presentation/blocs/password_login_blod.dart/password_login_bloc.dart';
+import 'package:bright_bike_rentals/presentation/blocs/privacy_policy_bloc/privacy_policy_bloc.dart';
 import 'package:bright_bike_rentals/presentation/blocs/signin/signin_bloc.dart';
 
 import 'package:bright_bike_rentals/presentation/screens/splash_page/splashpage.dart';
@@ -118,8 +121,17 @@ class MyApp extends StatelessWidget {
         BlocProvider<PasswordLoginBloc>(
           create: (context) => PasswordLoginBloc(),
         ),
-          BlocProvider<OtpSigninBloc>(
+        BlocProvider<OtpSigninBloc>(
           create: (context) => OtpSigninBloc(),
+        ),
+        BlocProvider<FetchDashbordBloc>(
+          create: (context) => FetchDashbordBloc(),
+        ),
+        BlocProvider<FetchProfileBloc>(
+          create: (context) => FetchProfileBloc(),
+        ),
+         BlocProvider<PrivacyPolicyBloc>(
+          create: (context) => PrivacyPolicyBloc(),
         ),
       ],
       child: MaterialApp(

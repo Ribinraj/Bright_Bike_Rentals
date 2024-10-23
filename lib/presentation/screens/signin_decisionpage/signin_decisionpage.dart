@@ -1,8 +1,9 @@
 import 'dart:ui';
 
+import 'package:bright_bike_rentals/core/appconstants.dart';
 import 'package:bright_bike_rentals/core/colors.dart';
 import 'package:bright_bike_rentals/core/constants.dart';
-import 'package:bright_bike_rentals/core/images.dart';
+
 import 'package:bright_bike_rentals/core/responsive_utils.dart';
 import 'package:bright_bike_rentals/presentation/blocs/otp_bloc/otp_signin_bloc.dart';
 import 'package:bright_bike_rentals/presentation/blocs/password_login_blod.dart/password_login_bloc.dart';
@@ -52,7 +53,7 @@ class _ScreenSignIndecisionPageState extends State<ScreenSignIndecisionPage> {
                 width: ResponsiveUtils.wp(60),
                 height: ResponsiveUtils.hp(30),
                 child: Image.asset(
-                  AppImages.logo,
+                  Appconstants.logo,
                   fit: BoxFit.contain,
                 ),
               ),
@@ -94,6 +95,7 @@ class _ScreenSignIndecisionPageState extends State<ScreenSignIndecisionPage> {
                               showDialog(
                                 context: context,
                                 barrierDismissible: false,
+                                // ignore: deprecated_member_use
                                 builder: (context) => WillPopScope(
                                   onWillPop: () async =>
                                       false, // Prevents back button dismiss
@@ -117,7 +119,7 @@ class _ScreenSignIndecisionPageState extends State<ScreenSignIndecisionPage> {
                                   context,
                                   MaterialPageRoute(
                                       builder: (context) =>
-                                           ScreenOtpPage(customerid:state.customerid,)),
+                                           ScreenOtpPage(customerid:state.customerid,mobilenumber: widget.mobilenumber,)),
                                 );
                               } else if (state is OtpSigninErrorState) {
                                 CustomSnackBar.show(

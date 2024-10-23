@@ -1,15 +1,16 @@
+import 'package:bright_bike_rentals/core/colors.dart';
 import 'package:bright_bike_rentals/core/responsive_utils.dart';
 import 'package:flutter/material.dart';
 
 class QuoteCard extends StatelessWidget {
-  final String title;
+  //final String title;
   final String description;
   final String name;
   final String position;
 
   const QuoteCard({
     super.key,
-    required this.title,
+    // required this.title,
     required this.description,
     required this.name,
     required this.position,
@@ -41,15 +42,15 @@ class QuoteCard extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
-                  title.toUpperCase(),
-                  style: const TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.bold,
-                    color: Color(0xFF2A9D8F),
-                  ),
-                ),
-                const SizedBox(height: 12),
+                // Text(
+                //   title.toUpperCase(),
+                //   style: const TextStyle(
+                //     fontSize: 16,
+                //     fontWeight: FontWeight.bold,
+                //     color: Color(0xFF2A9D8F),
+                //   ),
+                // ),
+                // const SizedBox(height: 12),
                 Text(
                   description,
                   style: TextStyle(
@@ -87,7 +88,7 @@ class QuoteCard extends StatelessWidget {
               width: 60,
               height: 60,
               decoration: const BoxDecoration(
-                color: Color(0xFF2A9D8F),
+                color: Appcolors.kthemegreen,
                 borderRadius: BorderRadius.only(
                   topLeft: Radius.circular(12),
                   bottomRight: Radius.circular(60),

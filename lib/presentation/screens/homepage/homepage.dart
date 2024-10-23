@@ -1,181 +1,267 @@
 import 'package:bright_bike_rentals/core/colors.dart';
 import 'package:bright_bike_rentals/core/constants.dart';
 import 'package:bright_bike_rentals/core/responsive_utils.dart';
+import 'package:bright_bike_rentals/presentation/blocs/fetch_dashbord_databloc/fetch_dashbord_bloc.dart';
+import 'package:bright_bike_rentals/presentation/blocs/privacy_policy_bloc/privacy_policy_bloc.dart';
+import 'package:bright_bike_rentals/presentation/screens/Top_pickspage.dart/top_pickspage.dart';
 
-import 'package:bright_bike_rentals/presentation/screens/homepage/widgets/custom_imagecontainer.dart';
+
 import 'package:bright_bike_rentals/presentation/screens/homepage/widgets/quates_card.dart';
+import 'package:bright_bike_rentals/presentation/screens/homepage/widgets/shimmer.dart';
 import 'package:bright_bike_rentals/presentation/widgets/custom_appbar.dart';
+import 'package:bright_bike_rentals/presentation/widgets/custom_navigator.dart';
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:loading_animation_widget/loading_animation_widget.dart';
 
 import 'package:url_launcher/url_launcher.dart';
 
-class ScreenHomepage extends StatelessWidget {
+class ScreenHomepage extends StatefulWidget {
   const ScreenHomepage({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    final List<Map<String, String>> itemList = [
-      {
-        'image': 'assets/images/bicycle-wheel-against-sky-sunset.jpg',
-        'title': 'Activa 4G BS4',
-        'price1': '\u20B9 500',
-        'price2': '\u20B9 700',
-      },
-      {
-        'image': 'assets/images/bicycle-wheel-against-sky-sunset.jpg',
-        'title': 'Dio STD BS4',
-        'price1': '\u20B9 500',
-        'price2': '\u20B9 700',
-      },
-      {
-        'image': 'assets/images/bicycle-wheel-against-sky-sunset.jpg',
-        'title': 'Activa 5G',
-        'price1': '\u20B9 700',
-        'price2': '\u20B9 1000',
-      },
-      {
-        'image': 'assets/images/bicycle-wheel-against-sky-sunset.jpg',
-        'title': 'Activa 4G BS4',
-        'price1': '\u20B9 500',
-        'price2': '\u20B9 700',
-      },
-      {
-        'image': 'assets/images/bicycle-wheel-against-sky-sunset.jpg',
-        'title': 'Dio STD BS4',
-        'price1': '\u20B9 500',
-        'price2': '\u20B9 700',
-      },
-      // Add more items as needed
-    ];
+  State<ScreenHomepage> createState() => _ScreenHomepageState();
+}
 
+class _ScreenHomepageState extends State<ScreenHomepage> {
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    context.read<FetchDashbordBloc>().add(FetchDashbordDataInitialEvent());
+    context.read<PrivacyPolicyBloc>().add(PrivacyPolicyInitialFetchingEvent());
+  }
+
+  @override
+  Widget build(BuildContext context) {
     return Stack(children: [
-      Scaffold(
-        appBar: const CustomAppBar(),
-        drawer: const CustomDrawer(),
-        body: ListView(
-          padding: EdgeInsets.all(ResponsiveUtils.wp(4)),
-          children: [
-            const Imagecontainer(),
-            ResponsiveSizedBox.height10,
-            Row(
-              children: [
-                TextStyles.headline(
-                  text: 'Top Picks',
-                  color: Appcolors.kgreyColor,
-                ),
-                const Spacer(),
-                Text(
-                  'View More',
-                  style: TextStyle(
-                    color: Appcolors.kgreyColor,
-                    fontSize: ResponsiveUtils.wp(3.5),
-                    decoration: TextDecoration.underline,
-                    decorationThickness: 1,
-                    decorationColor: Appcolors.kgreyColor,
-                  ),
-                )
-              ],
-            ),
-            ResponsiveSizedBox.height10,
-            SizedBox(
-              height: ResponsiveUtils.hp(21), // Adjusted from fixed 210
-              child: ListView.builder(
-                scrollDirection: Axis.horizontal,
-                itemCount: itemList.length,
-                padding: EdgeInsets.all(ResponsiveUtils.wp(1)),
-                itemBuilder: (context, index) {
-                  return Container(
-                    padding: const EdgeInsets.all(8),
-                    //width: ResponsiveUtils.wp(45), // Added responsive width
-                    margin: EdgeInsets.only(right: ResponsiveUtils.wp(2)),
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius:
-                          BorderRadius.circular(ResponsiveUtils.wp(2)),
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.grey.withOpacity(0.5),
-                          spreadRadius: ResponsiveUtils.wp(0.5),
-                          blurRadius: ResponsiveUtils.wp(1),
-                          offset: Offset(0, ResponsiveUtils.hp(0.5)),
-                        ),
-                      ],
-                    ),
-                    child: Column(
+      BlocConsumer<FetchDashbordBloc, FetchDashbordState>(
+        listener: (context, state) {
+          // TODO: implement listener
+        },
+        builder: (context, state) {
+          if (state is FetchDashbordDataLoadingState) {
+            return ScreenHomepageShimmer();
+          }
+          if (state is FetchDashbordDataSuccessState) {
+            return Scaffold(
+                appBar: const CustomAppBar(),
+                drawer: const CustomDrawer(),
+                body: ListView(
+                  padding: EdgeInsets.all(ResponsiveUtils.wp(4)),
+                  children: [
+                    //Imagecontainer(state: state, userName: 'Ribin'),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Padding(
-                          padding: EdgeInsets.all(ResponsiveUtils.wp(3)),
-                          child: TextStyles.body(
-                              text: itemList[index]['title']!,
-                              weight: FontWeight.bold),
-                        ),
-                        ClipRRect(
-                          borderRadius:
-                              BorderRadius.circular(ResponsiveUtils.wp(2)),
-                          child: Image.asset(
-                            itemList[index]['image']!,
-                            width: ResponsiveUtils.wp(23),
-                            height: ResponsiveUtils.hp(8),
-                            fit: BoxFit.cover,
-                          ),
+                        TextStyles.headline(text: 'Welcome Ribin'),
+                        TextStyles.headline(
+                          text: 'Find your ride',
+                          color: Appcolors.kgreyColor,
                         ),
                         ResponsiveSizedBox.height10,
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            TextStyles.caption(
-                              text: 'starts from :',
+                        if (state.dashborddata.banners.isNotEmpty)
+                          CarouselSlider.builder(
+                            itemCount: state.dashborddata.banners.length,
+                            options: CarouselOptions(
+                              autoPlay: true,
+                              enlargeCenterPage: false,
+                              viewportFraction: 1,
+                              pageSnapping: true,
+                              autoPlayCurve: Curves.easeInOut,
+                              autoPlayAnimationDuration:
+                                  const Duration(seconds: 1),
                             ),
-                            ResponsiveSizedBox.width10,
-                            TextStyles.body(
-                              text: '\u20B9 500',
-                            )
-                          ],
-                        ),
+                            itemBuilder: (context, itemIndex, pageViewIndex) {
+                              return Padding(
+                                padding: const EdgeInsets.all(2),
+                                child: ClipRRect(
+                                  borderRadius: BorderRadiusStyles.kradius20(),
+                                  child: _buildImageWithFallback(
+                                    imageUrl: state.dashborddata
+                                        .banners[itemIndex].bannerImageMobile,
+                                    width: double.infinity,
+                                    height: ResponsiveUtils.hp(23),
+                                  ),
+                                ),
+                              );
+                            },
+                          ),
                       ],
                     ),
-                  );
-                },
-              ),
-            ),
-            ResponsiveSizedBox.height20,
-            TextStyles.headline(
-              text: 'Customer Feedbacks',
-              color: Appcolors.kgreyColor,
-            ),
-            Container(
-              height: ResponsiveUtils.hp(40), // Adjusted from fixed 300
+                    ResponsiveSizedBox.height10,
+                    Row(
+                      children: [
+                        Expanded(
+                          child: TextStyles.headline(
+                            text: 'Top Picks',
+                            color: Appcolors.kgreyColor,
+                          ),
+                        ),
+                        GestureDetector(
+                          onTap: () {
+                            navigatePush(
+                                context, ScreenTopPickspage(state: state));
+                          },
+                          child: Text(
+                            'View More',
+                            style: TextStyle(
+                              color: Appcolors.kgreyColor,
+                              fontSize: ResponsiveUtils.wp(3.5),
+                              decoration: TextDecoration.underline,
+                              decorationThickness: 1,
+                              decorationColor: Appcolors.kgreyColor,
+                            ),
+                          ),
+                        )
+                      ],
+                    ),
+                    ResponsiveSizedBox.height10,
 
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(ResponsiveUtils.wp(8)),
-                  topRight: Radius.circular(ResponsiveUtils.wp(8)),
-                ),
-                color: Appcolors.kwhiteColor,
-              ),
-              child: Center(
-                child: ListView.builder(
-                  scrollDirection: Axis.horizontal,
-                  itemCount: 8,
-                  padding: EdgeInsets.all(ResponsiveUtils.wp(1)),
-                  itemBuilder: (context, index) {
-                    return const SizedBox(
-                      // width: ResponsiveUtils.wp(80), // Added responsive width
-                      child: QuoteCard(
-                        title: 'Good Service',
-                        description:
-                            'fjjjfdsjfjkljsdlfjklsdjfilsd,dfhfofsflsflsdjfklsdjlksjlsl,fhdhfjssshsfhksdfsdfks,fdslfjlsdjflsdjflsdjfsdlfjls',
-                        name: 'Ribin',
-                        position: 'Developer',
+                    // First ListView (Bikes) with intrinsic height
+                    if (state.dashborddata.bikes.isNotEmpty)
+                      SingleChildScrollView(
+                        scrollDirection: Axis.horizontal,
+                        child: IntrinsicHeight(
+                          child: Row(
+                            children: List.generate(
+                              state.dashborddata.bikes.length,
+                              (index) {
+                                final bikes = state.dashborddata.bikes;
+                                return Container(
+                                  width: ResponsiveUtils.wp(42),
+                                  margin: EdgeInsets.only(
+                                    right: ResponsiveUtils.wp(2),
+                                    top: ResponsiveUtils.wp(1),
+                                    bottom: ResponsiveUtils.wp(2),
+                                    left: ResponsiveUtils.wp(1),
+                                  ),
+                                  decoration: BoxDecoration(
+                                    color: Colors.white,
+                                    borderRadius: BorderRadius.circular(
+                                        ResponsiveUtils.wp(2)),
+                                    boxShadow: [
+                                      BoxShadow(
+                                        color: Colors.grey.withOpacity(0.5),
+                                        spreadRadius: ResponsiveUtils.wp(0.5),
+                                        blurRadius: ResponsiveUtils.wp(1),
+                                        offset:
+                                            Offset(0, ResponsiveUtils.hp(0.5)),
+                                      ),
+                                    ],
+                                  ),
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Padding(
+                                        padding: EdgeInsets.all(
+                                            ResponsiveUtils.wp(3)),
+                                        child: Center(
+                                          child: Text(
+                                            bikes[index].bikeName,
+                                            style: TextStyle(
+                                              fontWeight: FontWeight.bold,
+                                              fontSize: ResponsiveUtils.wp(3.5),
+                                            ),
+                                            maxLines: 2,
+                                            overflow: TextOverflow.ellipsis,
+                                          ),
+                                        ),
+                                      ),
+                                      AspectRatio(
+                                        aspectRatio: 15 / 8,
+                                        child: ClipRRect(
+                                          borderRadius: BorderRadius.circular(
+                                              ResponsiveUtils.wp(2)),
+                                          child: _buildImageWithFallback(
+                                            imageUrl: bikes[index].bikePicture,
+                                            width: double.infinity,
+                                            height: double.infinity,
+                                            fit: BoxFit.contain,
+                                          ),
+                                        ),
+                                      ),
+                                      Padding(
+                                        padding: EdgeInsets.all(
+                                            ResponsiveUtils.wp(2)),
+                                        child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          children: [
+                                            TextStyles.caption(
+                                                text: 'starts from :',
+                                                color: Appcolors.kyellowColor),
+                                            ResponsiveSizedBox.width10,
+                                            TextStyles.body(
+                                                text:
+                                                    '\u20B9${bikes[index].weekdayHalfPrice}'),
+                                          ],
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                );
+                              },
+                            ),
+                          ),
+                        ),
                       ),
-                    );
-                  },
-                ),
-              ),
-            ),
-          ],
-        ),
+
+                    ResponsiveSizedBox.height20,
+                    TextStyles.headline(
+                      text: 'Customer Feedbacks',
+                      color: Appcolors.kgreyColor,
+                    ),
+                    ResponsiveSizedBox.height10,
+
+                    // Second ListView (Testimonials) with intrinsic height
+                    Container(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular(ResponsiveUtils.wp(8)),
+                          topRight: Radius.circular(ResponsiveUtils.wp(8)),
+                        ),
+                        color: Appcolors.kwhiteColor,
+                      ),
+                      child: SingleChildScrollView(
+                        scrollDirection: Axis.horizontal,
+                        child: IntrinsicHeight(
+                          child: Row(
+                            children: List.generate(
+                              state.dashborddata.testimonials.length,
+                              (index) {
+                                final testimonials =
+                                    state.dashborddata.testimonials;
+                                return Container(
+                                  width: ResponsiveUtils.wp(60),
+                                  margin: EdgeInsets.symmetric(
+                                    horizontal: ResponsiveUtils.wp(2),
+                                    vertical: ResponsiveUtils.wp(2),
+                                  ),
+                                  child: QuoteCard(
+                                    description:
+                                        testimonials[index].testimonial,
+                                    name: testimonials[index].customerName,
+                                    position:
+                                        testimonials[index].customerDesignation,
+                                  ),
+                                );
+                              },
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ));
+          } else {
+            return SizedBox();
+          }
+        },
       ),
       Positioned(
         bottom: ResponsiveUtils.hp(7),
@@ -225,6 +311,50 @@ class ScreenHomepage extends StatelessWidget {
     } else {
       throw 'Could not launch $url';
     }
+  }
+
+  ///
+  Widget _buildImageWithFallback({
+    required String imageUrl,
+    required double width,
+    required double height,
+    BoxFit fit = BoxFit.cover,
+  }) {
+    return CachedNetworkImage(
+      imageUrl: imageUrl,
+      width: width,
+      height: height,
+      fit: fit,
+      placeholder: (context, url) => Center(
+        child: LoadingAnimationWidget.fourRotatingDots(
+          color: Appcolors.kblackColor,
+          size: 20,
+        ),
+      ),
+      errorWidget: (context, url, error) => Container(
+        width: width,
+        height: height,
+        color: Colors.grey[200],
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Icon(
+              Icons.image_not_supported_outlined,
+              size: ResponsiveUtils.wp(10),
+              color: Colors.grey[400],
+            ),
+            const SizedBox(height: 8),
+            Text(
+              'Image not available',
+              style: TextStyle(
+                color: Colors.grey[600],
+                fontSize: ResponsiveUtils.wp(3),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
   }
 }
   // Column(

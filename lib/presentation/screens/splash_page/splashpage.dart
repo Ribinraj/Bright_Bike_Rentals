@@ -67,11 +67,13 @@
 //     );
 //   }
 // }
+import 'package:bright_bike_rentals/core/appconstants.dart';
 import 'package:bright_bike_rentals/core/colors.dart';
-import 'package:bright_bike_rentals/core/images.dart';
+
 import 'package:bright_bike_rentals/presentation/screens/Mainpage/mainpage.dart';
 import 'package:bright_bike_rentals/presentation/screens/signin_page/siginin_page.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class AdvancedSplashScreen extends StatefulWidget {
   const AdvancedSplashScreen({Key? key}) : super(key: key);
@@ -115,13 +117,7 @@ class _AdvancedSplashScreenState extends State<AdvancedSplashScreen>
     _pulseAnimation = Tween(begin: 1.0, end: 1.2).animate(_pulseController);
 
     _controller.forward();
-
-    Future.delayed(const Duration(seconds: 5), () {
-      // Navigate to your main screen here
-      Navigator.of(context).pushReplacement(
-        MaterialPageRoute(builder: (context) => const ScreenSigninPage()),
-      );
-    });
+    checkUserlogin(context);
   }
 
   @override
@@ -150,9 +146,7 @@ class _AdvancedSplashScreenState extends State<AdvancedSplashScreen>
                   shape: BoxShape.circle,
                   gradient: RadialGradient(
                     colors: [
-                      Appcolors.kyellowColor
-                      
-                      ,
+                      Appcolors.kyellowColor,
                       Appcolors.korangeColor.withOpacity(.2)
                     ],
                   ),
@@ -166,9 +160,7 @@ class _AdvancedSplashScreenState extends State<AdvancedSplashScreen>
                 width: 220,
                 height: 220,
                 decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  color: Appcolors.kyellowColor
-                ),
+                    shape: BoxShape.circle, color: Appcolors.kyellowColor),
               ),
             ),
             // Logo with fade and scale effect
@@ -177,7 +169,7 @@ class _AdvancedSplashScreenState extends State<AdvancedSplashScreen>
               child: FadeTransition(
                 opacity: _animation,
                 child: Image.asset(
-                  AppImages.logo, // Replace with your logo asset path
+                  Appconstants.logo, // Replace with your logo asset path
                   width: 200,
                   height: 200,
                 ),
@@ -187,5 +179,19 @@ class _AdvancedSplashScreenState extends State<AdvancedSplashScreen>
         ),
       ),
     );
+  }
+
+  Future<void> checkUserlogin(context) async {
+    final preferences = await SharedPreferences.getInstance();
+    final userLoggedin = preferences.get('LOGIN');
+    if (userLoggedin == null || userLoggedin == false) {
+      await Future.delayed(const Duration(seconds: 3));
+      Navigator.of(context).pushReplacement(
+          MaterialPageRoute(builder: (context) => const ScreenSigninPage()));
+    } else {
+      await Future.delayed(const Duration(seconds: 3));
+      Navigator.of(context).pushReplacement(
+          MaterialPageRoute(builder: (context) => ScreenMainPage()));
+    }
   }
 }
