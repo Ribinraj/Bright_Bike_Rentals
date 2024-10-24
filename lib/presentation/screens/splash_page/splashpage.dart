@@ -69,16 +69,19 @@
 // }
 import 'package:bright_bike_rentals/core/appconstants.dart';
 import 'package:bright_bike_rentals/core/colors.dart';
+import 'package:bright_bike_rentals/presentation/blocs/settings_bloc/settings_bloc_bloc.dart';
 
 import 'package:bright_bike_rentals/presentation/screens/Mainpage/mainpage.dart';
-import 'package:bright_bike_rentals/presentation/screens/signin_page/siginin_page.dart';
+
+import 'package:bright_bike_rentals/presentation/widgets/custom_navigator.dart';
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class AdvancedSplashScreen extends StatefulWidget {
-  const AdvancedSplashScreen({Key? key}) : super(key: key);
+  const AdvancedSplashScreen({super.key});
 
   @override
+  // ignore: library_private_types_in_public_api
   _AdvancedSplashScreenState createState() => _AdvancedSplashScreenState();
 }
 
@@ -117,7 +120,7 @@ class _AdvancedSplashScreenState extends State<AdvancedSplashScreen>
     _pulseAnimation = Tween(begin: 1.0, end: 1.2).animate(_pulseController);
 
     _controller.forward();
-    checkUserlogin(context);
+    navigate(context);
   }
 
   @override
@@ -181,17 +184,9 @@ class _AdvancedSplashScreenState extends State<AdvancedSplashScreen>
     );
   }
 
-  Future<void> checkUserlogin(context) async {
-    final preferences = await SharedPreferences.getInstance();
-    final userLoggedin = preferences.get('LOGIN');
-    if (userLoggedin == null || userLoggedin == false) {
-      await Future.delayed(const Duration(seconds: 3));
-      Navigator.of(context).pushReplacement(
-          MaterialPageRoute(builder: (context) => const ScreenSigninPage()));
-    } else {
-      await Future.delayed(const Duration(seconds: 3));
-      Navigator.of(context).pushReplacement(
-          MaterialPageRoute(builder: (context) => ScreenMainPage()));
-    }
+  Future<void> navigate(context) async {
+    await Future.delayed(const Duration(seconds: 3));
+    navigatePush(context, ScreenMainPage());
   }
+ 
 }

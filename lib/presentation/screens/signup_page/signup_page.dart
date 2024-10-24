@@ -5,13 +5,21 @@ import 'package:bright_bike_rentals/core/colors.dart';
 import 'package:bright_bike_rentals/core/constants.dart';
 
 import 'package:bright_bike_rentals/core/responsive_utils.dart';
+import 'package:bright_bike_rentals/presentation/blocs/bloc/signup_bloc.dart';
+import 'package:bright_bike_rentals/presentation/screens/signin_decisionpage/signin_decisionpage.dart';
+import 'package:bright_bike_rentals/presentation/screens/signup_page/widgets/customreadonly_textfield.dart';
+
 import 'package:bright_bike_rentals/presentation/widgets/custom_snackbar.dart';
 import 'package:bright_bike_rentals/presentation/widgets/custom_textfield.dart';
-import 'package:bright_bike_rentals/presentation/widgets/custom_validators.dart';
+
 import 'package:flutter/material.dart';
 import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:loading_animation_widget/loading_animation_widget.dart';
+
 class ScreenSignUppage extends StatefulWidget {
-  const ScreenSignUppage({super.key});
+  final String mobilenumber;
+  const ScreenSignUppage({super.key, required this.mobilenumber});
 
   @override
   State<ScreenSignUppage> createState() => _ScreenSignUppageState();
@@ -20,13 +28,28 @@ class ScreenSignUppage extends StatefulWidget {
 class _ScreenSignUppageState extends State<ScreenSignUppage> {
   final TextEditingController userNamecontroller = TextEditingController();
   final TextEditingController mobileNumberController = TextEditingController();
-  final TextEditingController emailAdressController = TextEditingController();
+  // final TextEditingController emailAdressController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
   final TextEditingController confirmPasswordController =
       TextEditingController();
   final formKey = GlobalKey<FormState>();
   @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    mobileNumberController.text = widget.mobilenumber;
+  }
+    @override
+  void dispose() {
+    // Clean up controllers when the widget is disposed
+    userNamecontroller.dispose();
+    mobileNumberController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
+    final signupbloc = context.read<SignupBloc>();
     return Scaffold(
       body: Container(
         decoration: const BoxDecoration(
@@ -50,9 +73,8 @@ class _ScreenSignUppageState extends State<ScreenSignUppage> {
                 ),
               ),
               ResponsiveSizedBox.height50,
-              CustomTextfield(
-                  controller: mobileNumberController,
-                  labelText: 'Mobile Number'),
+              CustomReadOnlyTextField(controller:mobileNumberController, labelText:'Mobile Number'),
+            
               ResponsiveSizedBox.height20,
               CustomTextfield(
                   validator: (value) {
@@ -64,11 +86,11 @@ class _ScreenSignUppageState extends State<ScreenSignUppage> {
                   controller: userNamecontroller,
                   labelText: 'Enter Username'),
               ResponsiveSizedBox.height20,
-              CustomTextfield(
-                  validator: validateEmail,
-                  controller: emailAdressController,
-                  labelText: 'Enter EmailAdress'),
-              ResponsiveSizedBox.height20,
+              // CustomTextfield(
+              //     validator: validateEmail,
+              //     controller: emailAdressController,
+              //     labelText: 'Enter EmailAdress'),
+              // ResponsiveSizedBox.height20,
               CustomTextfield(
                   validator: (value) {
                     if (value == null || value.isEmpty) {
@@ -94,32 +116,77 @@ class _ScreenSignUppageState extends State<ScreenSignUppage> {
               ResponsiveSizedBox.height30,
               SizedBox(
                 width: double.infinity,
-                child: ElevatedButton(
-                  onPressed: () {
-                    if (formKey.currentState!.validate()) {
-                    } else {
-                     CustomSnackBar.show(
+                child: BlocConsumer<SignupBloc, SignupState>(
+                  listener: (context, state) {
+                    if (state is SignupSuccessState) {
+                      MaterialPageRoute(
+                        builder: (context) => ScreenSignIndecisionPage(
+                          mobilenumber: widget.mobilenumber,
+                        ),
+                      );
+                    } else if (state is SignupErrorState) {
+                      CustomSnackBar.show(
+                          context: context,
+                          title: 'Error!',
+                          message: state.message,
+                          contentType: ContentType.failure);
+                    }
+                  },
+                  builder: (context, state) {
+                    if (state is SignupLoadingState) {
+                      return SizedBox(
+                        width: double.infinity,
+                        child: ElevatedButton(
+                          onPressed: () {},
+                          style: ElevatedButton.styleFrom(
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadiusStyles.kradius10(),
+                              ),
+                              backgroundColor: Appcolors.kyellowColor),
+                          child: Padding(
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 30, vertical: 15),
+                              child: Center(
+                                child: LoadingAnimationWidget.staggeredDotsWave(
+                                    color: Appcolors.kblackColor, size: 30),
+                              )),
+                        ),
+                      );
+                    }
+                    return ElevatedButton(
+                      onPressed: () {
+                        if (formKey.currentState!.validate()) {
+                          signupbloc.add(SignupButtonClickingEvent(
+                              username: userNamecontroller.text,
+                              mobilenumber: widget.mobilenumber,
+                              password: passwordController.text,
+                              confirmpassword: confirmPasswordController.text));
+                        } else {
+                          CustomSnackBar.show(
                               context: context,
                               title: 'Failed !!',
                               message: 'please Enter valid mobilenumber',
                               contentType: ContentType.failure);
-                    }
-                  },
-                  style: ElevatedButton.styleFrom(
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadiusStyles.kradius10(),
+                        }
+                      },
+                      style: ElevatedButton.styleFrom(
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadiusStyles.kradius10(),
+                          ),
+                          backgroundColor: Appcolors.kyellowColor),
+                      child: const Padding(
+                        padding:
+                            EdgeInsets.symmetric(horizontal: 30, vertical: 15),
+                        child: Text(
+                          'SignUp',
+                          style: TextStyle(
+                              fontSize: 17,
+                              fontWeight: FontWeight.bold,
+                              color: Appcolors.kblackColor),
+                        ),
                       ),
-                      backgroundColor: Appcolors.kyellowColor),
-                  child: const Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 30, vertical: 15),
-                    child: Text(
-                      'SignUp',
-                      style: TextStyle(
-                          fontSize: 17,
-                          fontWeight: FontWeight.bold,
-                          color: Appcolors.kblackColor),
-                    ),
-                  ),
+                    );
+                  },
                 ),
               ),
             ],

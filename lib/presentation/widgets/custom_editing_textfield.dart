@@ -52,7 +52,7 @@ class CustomEditingTextField extends StatelessWidget {
                 Text(
                   title,
                   style: TextStyle(
-                    fontSize: 16,
+                    fontSize: 15,
                     fontWeight: FontWeight.bold,
                     color: Colors.grey[600],
                   ),
@@ -63,14 +63,14 @@ class CustomEditingTextField extends StatelessWidget {
                   decoration: InputDecoration(
                     hintText: hintText,
                     hintStyle: TextStyle(
-                      fontSize: 18,
+                      fontSize: 15,
                       color: Colors.grey[400],
                     ),
                     border: InputBorder.none,
                     contentPadding: EdgeInsets.zero,
                   ),
                   style: const TextStyle(
-                    fontSize: 18,
+                    fontSize: 15,
                     color: Colors.black,
                   ),
                   keyboardType: keyboardType,

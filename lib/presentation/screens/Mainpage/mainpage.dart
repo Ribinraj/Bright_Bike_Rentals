@@ -3,6 +3,7 @@ import 'package:bright_bike_rentals/presentation/screens/Mainpage/widgets/custom
 
 import 'package:bright_bike_rentals/presentation/screens/bookingpage/bookingpage.dart';
 import 'package:bright_bike_rentals/presentation/screens/cartpage/cart_Page.dart';
+import 'package:bright_bike_rentals/presentation/screens/gust_signinpage/gust_signinpage.dart';
 import 'package:bright_bike_rentals/presentation/screens/homepage/homepage.dart';
 import 'package:bright_bike_rentals/presentation/screens/network_connectivitypage.dart/connectivity_page.dart';
 import 'package:bright_bike_rentals/presentation/screens/profile_page/profile_page.dart';
@@ -38,7 +39,7 @@ class ScreenMainPage extends StatelessWidget {
     const ScreenSearchPage(),
     const ScreenCartpage(),
     const ScreenBookingPage(),
-    const ProfilePage()
+    const ScreenGustorSigninPage()
   ];
 
   @override

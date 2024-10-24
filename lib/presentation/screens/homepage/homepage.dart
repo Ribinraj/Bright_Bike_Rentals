@@ -5,7 +5,6 @@ import 'package:bright_bike_rentals/presentation/blocs/fetch_dashbord_databloc/f
 import 'package:bright_bike_rentals/presentation/blocs/privacy_policy_bloc/privacy_policy_bloc.dart';
 import 'package:bright_bike_rentals/presentation/screens/Top_pickspage.dart/top_pickspage.dart';
 
-
 import 'package:bright_bike_rentals/presentation/screens/homepage/widgets/quates_card.dart';
 import 'package:bright_bike_rentals/presentation/screens/homepage/widgets/shimmer.dart';
 import 'package:bright_bike_rentals/presentation/widgets/custom_appbar.dart';
@@ -49,7 +48,7 @@ class _ScreenHomepageState extends State<ScreenHomepage> {
           if (state is FetchDashbordDataSuccessState) {
             return Scaffold(
                 appBar: const CustomAppBar(),
-                drawer: const CustomDrawer(),
+                drawer:CustomDrawer(),
                 body: ListView(
                   padding: EdgeInsets.all(ResponsiveUtils.wp(4)),
                   children: [
@@ -57,7 +56,7 @@ class _ScreenHomepageState extends State<ScreenHomepage> {
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        TextStyles.headline(text: 'Welcome Ribin'),
+                        TextStyles.headline(text: 'Pedal your freedom,'),
                         TextStyles.headline(
                           text: 'Find your ride',
                           color: Appcolors.kgreyColor,

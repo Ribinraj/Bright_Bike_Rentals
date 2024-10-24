@@ -32,7 +32,7 @@ class ScreenTopPickspage extends StatelessWidget {
         actions: [
           Padding(
               padding: EdgeInsets.symmetric(horizontal: ResponsiveUtils.wp(1)),
-              child: const PhoneCallButton()),
+              child:  PhoneCallButton()),
           IconButton(
               onPressed: () {
                 navigatePush(context, NotificationPage());
@@ -146,7 +146,7 @@ class ScreenTopPickspage extends StatelessWidget {
                             vertical: ResponsiveUtils.hp(1)),
                         width: double.infinity,
                         decoration: BoxDecoration(
-                          color: Appcolors.kthemegreen.withOpacity(.8),
+                          color: Appcolors.kyellowColor.withOpacity(.8),
                           borderRadius: const BorderRadius.only(
                             bottomLeft: Radius.circular(5),
                             bottomRight: Radius.circular(5),

@@ -47,7 +47,7 @@ class Banner {
     return Banner(
       bannerId: json['bannerId'],
       bannerImage: json['bannerImage'],
-      bannerImageMobile: json['bannerImageMobile'],
+      bannerImageMobile: json['bannerImageMobile']??'',
       bannerLink: json['bannerLink'],
       bannerPosition: json['bannerPosition'],
       createdDate: json['createdDate'],

@@ -218,7 +218,9 @@ class CustomDrawer extends StatelessWidget {
               ],
             );
           } else {
-            return const SizedBox();
+            return const SizedBox(child: Center(
+              child: Text('drawer errror'),
+            ),);
           }
         },
       ),

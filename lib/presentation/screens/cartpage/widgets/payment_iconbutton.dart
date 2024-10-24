@@ -31,7 +31,7 @@ class PaymentIconButton extends StatelessWidget {
         icon: Icon(
           Icons.circle,
           size: ResponsiveUtils.wp(4),
-          color: isClicked ? Appcolors.kyellowColor : Appcolors.kgreyColor,
+          color: isClicked ? Appcolors.kyellowColor : Appcolors.kwhiteColor,
         ),
         onPressed: onPressed,
       ),

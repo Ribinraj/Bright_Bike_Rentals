@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:convert';
+import 'dart:developer';
 
 import 'package:bloc/bloc.dart';
 import 'package:bright_bike_rentals/data/settings_model.dart';
@@ -22,13 +23,15 @@ class SettingsBlocBloc extends Bloc<SettingsBlocEvent, SettingsBlocState> {
     emit(SettingsFetchingLoadingState());
     final Response response = await SettingsRepo.fetchsettingsdata();
     final responsedata = jsonDecode(response.body);
-    if (responsedata['status']==200) {
-          SharedPreferences preferences = await SharedPreferences.getInstance();
-        preferences.setBool('LOGIN', true);
-        preferences.setString('BUSINESSPHONENUMBER', responsedata["data"]["businessPhoneNumber"]);
-      final settingsdata =
-          SettingsDataModel.fromJson(responsedata['data']);
+    if (responsedata['status'] == 200) {
+      SharedPreferences preferences = await SharedPreferences.getInstance();
+      preferences.setBool('LOGIN', true);
+      preferences.setString(
+          'BUSINESSPHONENUMBER', responsedata["data"]["businessPhoneNumber"]);
+      final settingsdata = SettingsDataModel.fromJson(responsedata['data']);
       emit(SettingsFetchingSuccessState(settingsdata: settingsdata));
+    } else {
+      log('else work');
     }
   }
 }

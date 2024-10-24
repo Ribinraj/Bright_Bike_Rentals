@@ -3,6 +3,7 @@ class Endpoints {
   static const mobilenumbercheck = 'login';
   static const passwordlogin = 'login/login';
   static const otplogin = 'login/loginotp';
+  static const signup = 'login/signup';
   static const verifyotp = 'login/verifyotp';
   static const dashbord = 'dashboard';
   static const fetchprofile = 'login/profile';

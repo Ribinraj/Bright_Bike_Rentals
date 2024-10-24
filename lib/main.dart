@@ -44,6 +44,7 @@ import 'package:bright_bike_rentals/core/colors.dart';
 import 'package:bright_bike_rentals/core/responsive_utils.dart';
 import 'package:bright_bike_rentals/domain/controllers/push_notification_services.dart';
 import 'package:bright_bike_rentals/firebase_options.dart';
+import 'package:bright_bike_rentals/presentation/blocs/bloc/signup_bloc.dart';
 import 'package:bright_bike_rentals/presentation/blocs/bottom_navigationbar/bottom_navigationbar_bloc.dart';
 import 'package:bright_bike_rentals/presentation/blocs/connectivity_bloc/connectivity_bloc.dart';
 import 'package:bright_bike_rentals/presentation/blocs/fetch_dashbord_databloc/fetch_dashbord_bloc.dart';
@@ -51,9 +52,12 @@ import 'package:bright_bike_rentals/presentation/blocs/fetch_profilebloc.dart/fe
 import 'package:bright_bike_rentals/presentation/blocs/otp_bloc/otp_signin_bloc.dart';
 import 'package:bright_bike_rentals/presentation/blocs/password_login_blod.dart/password_login_bloc.dart';
 import 'package:bright_bike_rentals/presentation/blocs/privacy_policy_bloc/privacy_policy_bloc.dart';
+import 'package:bright_bike_rentals/presentation/blocs/settings_bloc/settings_bloc_bloc.dart';
 import 'package:bright_bike_rentals/presentation/blocs/signin/signin_bloc.dart';
 
+
 import 'package:bright_bike_rentals/presentation/screens/splash_page/splashpage.dart';
+import 'package:bright_bike_rentals/presentation/widgets/sharedprefernce.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
@@ -71,6 +75,7 @@ void main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+   await initializePhoneNumber(); 
 //initialize firebase messaging
   await Pushnotifications.init();
   //initialize local notifications
@@ -132,6 +137,12 @@ class MyApp extends StatelessWidget {
         ),
          BlocProvider<PrivacyPolicyBloc>(
           create: (context) => PrivacyPolicyBloc(),
+        ),
+         BlocProvider<SignupBloc>(
+          create: (context) =>SignupBloc(),
+        ),
+           BlocProvider<SettingsBlocBloc>(
+          create: (context) =>SettingsBlocBloc(),
         ),
       ],
       child: MaterialApp(

@@ -82,4 +82,26 @@ class SigninRepo {
       return 'failed';
     }
   }
+  ////
+   static Future signup({required String mobilenumber, required String username, required String password, required String confirmpassword  }) async {
+    try {
+      var response = await client.post(
+          Uri.parse('${Endpoints.baseurl}${Endpoints.signup}'),
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: jsonEncode({'customerName':username,
+        'customerMobile':mobilenumber,
+        'customerPassword':password,
+        'password_confirmation':confirmpassword
+        }));
+
+    
+      return response;
+    } catch (e) {
+      debugPrint(e.toString());
+      log(e.toString());
+      return 'failed';
+    }
+  }
 }

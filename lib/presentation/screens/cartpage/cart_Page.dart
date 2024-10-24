@@ -6,12 +6,14 @@ import 'package:bright_bike_rentals/presentation/screens/cartpage/widgets/cart_t
 import 'package:bright_bike_rentals/presentation/screens/cartpage/widgets/payment_iconbutton.dart';
 import 'package:bright_bike_rentals/presentation/screens/cartpage/widgets/tick_iconbutton.dart';
 import 'package:bright_bike_rentals/presentation/screens/cartpage/widgets/top_container.dart';
+import 'package:bright_bike_rentals/presentation/screens/gust_signinpage/gust_signinpage.dart';
 import 'package:bright_bike_rentals/presentation/screens/payment_failiurepage/payment_failiure.dart';
 
 import 'package:bright_bike_rentals/presentation/widgets/custom_appbar.dart';
 import 'package:bright_bike_rentals/presentation/widgets/custom_navigator.dart';
 import 'package:bright_bike_rentals/presentation/widgets/dash_devider.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class ScreenCartpage extends StatefulWidget {
   const ScreenCartpage({super.key});
@@ -163,7 +165,7 @@ class _ScreenCartpageState extends State<ScreenCartpage> {
                       height: ResponsiveUtils.sp(10),
                       child: ElevatedButton(
                         onPressed: () {
-                          navigatePush(context, const ScreenCheckoutPage());
+                          checkUserlogin(context);
                         },
                         style: ElevatedButton.styleFrom(
                           backgroundColor: Appcolors.kyellowColor,
@@ -190,5 +192,15 @@ class _ScreenCartpageState extends State<ScreenCartpage> {
         ),
       ),
     );
+  }
+
+  Future<void> checkUserlogin(context) async {
+    final preferences = await SharedPreferences.getInstance();
+    final userLoggedin = preferences.get('LOGIN');
+    if (userLoggedin == null || userLoggedin == false) {
+      navigatePush(context, const ScreenGustorSigninPage());
+    } else {
+      navigatePush(context, ScreenCheckoutPage());
+    }
   }
 }

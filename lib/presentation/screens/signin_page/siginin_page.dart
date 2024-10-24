@@ -93,7 +93,7 @@ class _ScreenSigninPageState extends State<ScreenSigninPage> {
                           Navigator.pushReplacement(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => const ScreenSignUppage(),
+                              builder: (context) =>  ScreenSignUppage(mobilenumber:phonenumberController.text,),
                             ),
                           );
                         }
@@ -145,29 +145,7 @@ class _ScreenSigninPageState extends State<ScreenSigninPage> {
                       );
                     },
                   ),
-                  // Padding(
-                  //   padding: EdgeInsets.all(ResponsiveUtils.wp(1)),
-                  //   child: Row(
-                  //     mainAxisAlignment: MainAxisAlignment.end,
-                  //     children: [
-                  //       TextStyles.caption(
-                  //           text: 'Dont have an account?',
-                  //           color: Appcolors.kblackColor,
-                  //           weight: FontWeight.w600),
-                  //       InkWell(
-                  //         onTap: () {
-                  //           navigatePush(context, ScreenSignUppage());
-                  //         },
-                  //         child: const ResponsiveText(
-                  //           'SignUp',
-                  //           sizeFactor: .8,
-                  //           weight: FontWeight.bold,
-                  //           color: Appcolors.kredColor,
-                  //         ),
-                  //       )
-                  //     ],
-                  //   ),
-                  // ),
+
                 ],
               ),
             ],
