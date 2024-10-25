@@ -55,7 +55,6 @@ import 'package:bright_bike_rentals/presentation/blocs/privacy_policy_bloc/priva
 import 'package:bright_bike_rentals/presentation/blocs/settings_bloc/settings_bloc_bloc.dart';
 import 'package:bright_bike_rentals/presentation/blocs/signin/signin_bloc.dart';
 
-
 import 'package:bright_bike_rentals/presentation/screens/splash_page/splashpage.dart';
 import 'package:bright_bike_rentals/presentation/widgets/sharedprefernce.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -75,7 +74,7 @@ void main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-   await initializePhoneNumber(); 
+  await initializePhoneNumber();
 //initialize firebase messaging
   await Pushnotifications.init();
   //initialize local notifications
@@ -135,20 +134,21 @@ class MyApp extends StatelessWidget {
         BlocProvider<FetchProfileBloc>(
           create: (context) => FetchProfileBloc(),
         ),
-         BlocProvider<PrivacyPolicyBloc>(
+        BlocProvider<PrivacyPolicyBloc>(
           create: (context) => PrivacyPolicyBloc(),
         ),
-         BlocProvider<SignupBloc>(
-          create: (context) =>SignupBloc(),
+        BlocProvider<SignupBloc>(
+          create: (context) => SignupBloc(),
         ),
-           BlocProvider<SettingsBlocBloc>(
-          create: (context) =>SettingsBlocBloc(),
+        BlocProvider<SettingsBlocBloc>(
+          create: (context) => SettingsBlocBloc(),
         ),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         title: 'Bright Bike Rentals',
         theme: ThemeData(
+          appBarTheme: AppBarTheme(surfaceTintColor: Appcolors.kwhiteColor),
           fontFamily: 'Helvetica',
           useMaterial3: true,
           scaffoldBackgroundColor: Appcolors.kwhiteColor,

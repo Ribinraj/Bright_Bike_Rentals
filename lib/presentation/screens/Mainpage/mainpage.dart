@@ -1,5 +1,7 @@
 import 'package:bright_bike_rentals/presentation/blocs/bottom_navigationbar/bottom_navigationbar_bloc.dart';
 import 'package:bright_bike_rentals/presentation/screens/Mainpage/widgets/customnav.dart';
+import 'package:bright_bike_rentals/presentation/screens/accountpage/account_screen.dart';
+
 
 import 'package:bright_bike_rentals/presentation/screens/bookingpage/bookingpage.dart';
 import 'package:bright_bike_rentals/presentation/screens/cartpage/cart_Page.dart';
@@ -39,7 +41,7 @@ class ScreenMainPage extends StatelessWidget {
     const ScreenSearchPage(),
     const ScreenCartpage(),
     const ScreenBookingPage(),
-    const ScreenGustorSigninPage()
+     LoginScreen()
   ];
 
   @override

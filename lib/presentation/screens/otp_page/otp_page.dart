@@ -16,6 +16,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:lottie/lottie.dart';
 
+
 class ScreenOtpPage extends StatefulWidget {
   final String customerid;
   final String mobilenumber;
@@ -26,7 +27,7 @@ class ScreenOtpPage extends StatefulWidget {
   State<ScreenOtpPage> createState() => _ScreenOtpPageState();
 }
 
-class _ScreenOtpPageState extends State<ScreenOtpPage> {
+class _ScreenOtpPageState extends State<ScreenOtpPage>  {
   // Create 6 controllers for OTP fields
   final List<TextEditingController> otpControllers = List.generate(
     6,
@@ -208,7 +209,7 @@ class _ScreenOtpPageState extends State<ScreenOtpPage> {
                                     body: Center(
                                       child: Lottie.asset(
                                         loadinganimation,
-                                       
+
                                       ),
                                     ),
                                   ),
@@ -232,10 +233,10 @@ class _ScreenOtpPageState extends State<ScreenOtpPage> {
                                     contentType: ContentType.failure);
                               }
                             }
-                          
+
                           },
                           builder: (context, state) {
-                           
+
                             return GestureDetector(
                               onTap: () {
                                 startTimer();
@@ -338,3 +339,348 @@ class _ScreenOtpPageState extends State<ScreenOtpPage> {
     );
   }
 }
+////////
+// import 'dart:async';
+// import 'dart:io';
+
+// import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
+// import 'package:bright_bike_rentals/core/appconstants.dart';
+// import 'package:bright_bike_rentals/core/colors.dart';
+// import 'package:bright_bike_rentals/core/constants.dart';
+
+// import 'package:bright_bike_rentals/core/responsive_utils.dart';
+// import 'package:bright_bike_rentals/presentation/blocs/otp_bloc/otp_signin_bloc.dart';
+
+// import 'package:bright_bike_rentals/presentation/screens/Mainpage/mainpage.dart';
+// import 'package:bright_bike_rentals/presentation/widgets/custom_snackbar.dart';
+
+// import 'package:flutter/material.dart';
+// import 'package:flutter/services.dart';
+// import 'package:flutter_bloc/flutter_bloc.dart';
+// import 'package:loading_animation_widget/loading_animation_widget.dart';
+// import 'package:lottie/lottie.dart';
+// import 'package:pin_code_fields/pin_code_fields.dart';
+// import 'package:sms_autofill/sms_autofill.dart';
+
+// class ScreenOtpPage extends StatefulWidget {
+//   final String customerid;
+//   final String mobilenumber;
+//   const ScreenOtpPage(
+//       {super.key, required this.customerid, required this.mobilenumber});
+
+//   @override
+//   State<ScreenOtpPage> createState() => _ScreenOtpPageState();
+// }
+
+// class _ScreenOtpPageState extends State<ScreenOtpPage> with CodeAutoFill {
+//   Timer? _timer;
+//   int _secondsRemaining = 30;
+//   bool _isTimerActive = true;
+//   String? otpCode;
+//   final TextEditingController pinController = TextEditingController();
+//   @override
+//   void initState() {
+//     // TODO: implement initState
+//     super.initState();
+//     startTimer();
+//     _listenOTP();
+//      getAppSignature();
+//   }
+// Future<void> getAppSignature() async {
+//   final String signature = await SmsAutoFill().getAppSignature;
+//   debugPrint('App Signature: $signature');
+// }
+//  Future<void> _listenOTP() async {
+//   try {
+//     await SmsAutoFill().getAppSignature;
+//     await SmsAutoFill().listenForCode();
+    
+//     // Only use platform-specific code when necessary
+//     if (Platform.isIOS) {
+//       await SmsAutoFill().listenForCode();
+//     }
+//   } catch (e) {
+//     debugPrint('Error in _listenOTP: $e');
+//   }
+// }
+
+//   void startTimer() {
+//     _secondsRemaining = 30;
+//     _isTimerActive = true;
+//     _timer?.cancel();
+//     _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
+//       setState(() {
+//         if (_secondsRemaining > 0) {
+//           _secondsRemaining--;
+//         } else {
+//           _isTimerActive = false;
+//           _timer?.cancel();
+//         }
+//       });
+//     });
+//   }
+
+ 
+//  @override
+// void codeUpdated() {
+//   if (code != null) {
+//     setState(() {
+//       otpCode = code;
+//       pinController.text = code!;
+//     });
+    
+//     if (code!.length == 6) {
+//       final otpsigninbloc = context.read<OtpSigninBloc>();
+//       otpsigninbloc.add(VrifyOtpclickEvent(
+//         otp: code!,
+//         customerid: widget.customerid,
+//       ));
+//     }
+//   }
+// }
+// @override
+// void dispose() {
+//   cancel();
+//   _timer?.cancel();
+//   pinController.dispose();
+//   SmsAutoFill().unregisterListener();
+//   super.dispose();
+// }
+//   @override
+//   Widget build(BuildContext context) {
+//     final otpsigninbloc = context.read<OtpSigninBloc>();
+//     return Scaffold(
+//       body: Container(
+//         decoration: const BoxDecoration(
+//           gradient: LinearGradient(
+//             begin: Alignment.topCenter,
+//             end: Alignment.bottomCenter,
+//             colors: [Appcolors.kyellowColor, Appcolors.kwhiteColor],
+//           ),
+//         ),
+//         child: ListView(
+//           padding: EdgeInsets.all(ResponsiveUtils.wp(5)),
+//           children: [
+//             ResponsiveSizedBox.height50,
+//             SizedBox(
+//               width: ResponsiveUtils.wp(60),
+//               height: ResponsiveUtils.hp(30),
+//               child: Image.asset(
+//                 Appconstants.logo,
+//                 fit: BoxFit.contain,
+//               ),
+//             ),
+//             Column(
+//               crossAxisAlignment: CrossAxisAlignment.start,
+//               mainAxisAlignment: MainAxisAlignment.spaceBetween,
+//               children: [
+//                 ResponsiveSizedBox.height50,
+//                 const ResponsiveText(
+//                   'Self Ride\nBikes',
+//                   sizeFactor: 3,
+//                   weight: FontWeight.bold,
+//                 ),
+//                 TextStyles.headline(
+//                     text: 'Book bikes at flexible prices',
+//                     weight: FontWeight.bold),
+//                 ResponsiveSizedBox.height50,
+//                 // OTP Input Fields
+//                 Padding(
+//                   padding:
+//                       EdgeInsets.symmetric(horizontal: ResponsiveUtils.wp(2)),
+//                   child: PinCodeTextField(
+//                     appContext: context,
+//                     length: 6,
+//                     controller: pinController,
+//                     animationType: AnimationType.fade,
+//                     pinTheme: PinTheme(
+//                       shape: PinCodeFieldShape.box,
+//                       borderRadius: BorderRadiusStyles.kradius10(),
+//                       fieldHeight: ResponsiveUtils.wp(13),
+//                       fieldWidth: ResponsiveUtils.wp(13),
+//                       activeFillColor: Colors.transparent,
+//                       inactiveFillColor: Colors.transparent,
+//                       selectedFillColor: Colors.transparent,
+//                       activeColor: Appcolors.kblackColor,
+//                       inactiveColor: Appcolors.kblackColor,
+//                       selectedColor: Appcolors.kyellowColor,
+//                     ),
+//                     animationDuration: const Duration(milliseconds: 300),
+//                     enableActiveFill: true,
+//                     keyboardType: TextInputType.number,
+//                     onCompleted: (value) {
+//                       if (value.length == 6) {
+//                         otpsigninbloc.add(VrifyOtpclickEvent(
+//                           otp: value,
+//                           customerid: widget.customerid,
+//                         ));
+//                       }
+//                     },
+//                     onChanged: (value) {
+//                       setState(() {
+//                         otpCode = value;
+//                       });
+//                     },
+//                   ),
+//                 ),
+//                 Padding(
+//                   padding: EdgeInsets.all(ResponsiveUtils.wp(2)),
+//                   child: Row(
+//                     mainAxisAlignment: MainAxisAlignment.end,
+//                     children: [
+//                       if (_isTimerActive)
+//                         Row(
+//                           children: [
+//                             TextStyles.caption(
+//                                 text: 'Time remaining ',
+//                                 color: Appcolors.kgreenColor,
+//                                 weight: FontWeight.w600),
+//                             TextStyles.caption(
+//                               text:
+//                                   '00:${_secondsRemaining.toString().padLeft(2, '0')}',
+//                               color: Appcolors.kredColor,
+//                               weight: FontWeight.w600,
+//                             ),
+//                           ],
+//                         ),
+//                       if (!_isTimerActive)
+//                         BlocConsumer<OtpSigninBloc, OtpSigninState>(
+//                           listener: (context, state) {
+//                             if (state is OtpSigninLoadingState) {
+//                               showDialog(
+//                                 context: context,
+//                                 barrierDismissible: false,
+//                                 // ignore: deprecated_member_use
+//                                 builder: (context) => WillPopScope(
+//                                   onWillPop: () async =>
+//                                       false, // Prevents back button dismiss
+//                                   child: Scaffold(
+//                                     backgroundColor:
+//                                         Colors.white, // White background
+//                                     body: Center(
+//                                       child: Lottie.asset(
+//                                         loadinganimation,
+//                                       ),
+//                                     ),
+//                                   ),
+//                                 ),
+//                               );
+//                             } else {
+//                               Navigator.of(context).pop();
+
+//                               if (state is OtpSigninSuccessState) {
+//                                 Navigator.pushReplacement(
+//                                   context,
+//                                   MaterialPageRoute(
+//                                       builder: (context) => ScreenOtpPage(
+//                                             customerid: state.customerid,
+//                                             mobilenumber: widget.mobilenumber,
+//                                           )),
+//                                 );
+//                               } else if (state is OtpSigninErrorState) {
+//                                 CustomSnackBar.show(
+//                                     context: context,
+//                                     title: 'Error!',
+//                                     message: state.message,
+//                                     contentType: ContentType.failure);
+//                               }
+//                             }
+//                           },
+//                           builder: (context, state) {
+//                             return GestureDetector(
+//                               onTap: () {
+//                                 startTimer();
+//                                 otpsigninbloc.add(SendOtpclickEvent(
+//                                     mobilenumber: widget.mobilenumber));
+//                               },
+//                               child: TextStyles.caption(
+//                                 text: 'Resend OTP',
+//                                 color: Appcolors.kredColor,
+//                                 weight: FontWeight.w600,
+//                               ),
+//                             );
+//                           },
+//                         ),
+//                     ],
+//                   ),
+//                 ),
+//                 ResponsiveSizedBox.height50,
+//                 SizedBox(
+//                   width: double.infinity,
+//                   child: BlocConsumer<OtpSigninBloc, OtpSigninState>(
+//                     listener: (context, state) {
+//                       if (state is VerifyOtpSuccessState) {
+//                         Navigator.of(context).pushReplacement(MaterialPageRoute(
+//                             builder: (context) => ScreenMainPage()));
+//                       }
+//                       if (state is VerifyOtpErrorState) {
+//                         CustomSnackBar.show(
+//                             context: context,
+//                             title: 'Error!',
+//                             message: state.message,
+//                             contentType: ContentType.failure);
+//                       }
+//                     },
+//                     builder: (context, state) {
+//                       if (state is OtpSigninLoadingState) {
+//                         return SizedBox(
+//                           width: double.infinity,
+//                           child: ElevatedButton(
+//                             onPressed: null,
+//                             style: ElevatedButton.styleFrom(
+//                                 shape: RoundedRectangleBorder(
+//                                   borderRadius: BorderRadiusStyles.kradius10(),
+//                                 ),
+//                                 backgroundColor: Appcolors.kyellowColor),
+//                             child: Padding(
+//                                 padding: const EdgeInsets.symmetric(
+//                                     horizontal: 30, vertical: 15),
+//                                 child: Center(
+//                                   child:
+//                                       LoadingAnimationWidget.staggeredDotsWave(
+//                                           color: Appcolors.kblackColor,
+//                                           size: 30),
+//                                 )),
+//                           ),
+//                         );
+//                       }
+//                       bool isOtpCompleted =
+//                           otpCode != null && otpCode!.length == 6;
+//                       return ElevatedButton(
+//                         onPressed: isOtpCompleted
+//                             ? () {
+//                                 final otpsigninbloc =
+//                                     context.read<OtpSigninBloc>();
+//                                 otpsigninbloc.add(VrifyOtpclickEvent(
+//                                     otp: otpCode!,
+//                                     customerid: widget.customerid));
+//                               }
+//                             : null,
+//                         style: ElevatedButton.styleFrom(
+//                             shape: RoundedRectangleBorder(
+//                               borderRadius: BorderRadiusStyles.kradius10(),
+//                             ),
+//                             backgroundColor: Appcolors.kyellowColor),
+//                         child: const Padding(
+//                           padding: EdgeInsets.symmetric(
+//                               horizontal: 30, vertical: 15),
+//                           child: Text(
+//                             'Get Started',
+//                             style: TextStyle(
+//                                 fontSize: 17,
+//                                 fontWeight: FontWeight.bold,
+//                                 color: Appcolors.kblackColor),
+//                           ),
+//                         ),
+//                       );
+//                     },
+//                   ),
+//                 ),
+//               ],
+//             ),
+//           ],
+//         ),
+//       ),
+//     );
+//   }
+// }

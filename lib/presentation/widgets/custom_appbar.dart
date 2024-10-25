@@ -6,6 +6,7 @@ import 'package:bright_bike_rentals/presentation/screens/Policy_pages/cancellati
 import 'package:bright_bike_rentals/presentation/screens/Policy_pages/privacy_policy.dart';
 import 'package:bright_bike_rentals/presentation/screens/Policy_pages/refund_policy.dart';
 import 'package:bright_bike_rentals/presentation/screens/Policy_pages/terms_and_conditions.dart';
+import 'package:bright_bike_rentals/presentation/screens/contact_uspage/contact_uspage.dart';
 import 'package:bright_bike_rentals/presentation/screens/fleetpage/fleet_page.dart';
 
 import 'package:bright_bike_rentals/presentation/screens/notificationpage/notificationpage.dart';
@@ -113,8 +114,7 @@ class CustomDrawer extends StatelessWidget {
                     weight: FontWeight.w600,
                   ),
                   onTap: () {
-                    Navigator.pop(context);
-                    // Add navigation logic here
+                    navigatePush(context, ScreenContactusPage());
                   },
                 ),
                 ListTile(
@@ -218,9 +218,11 @@ class CustomDrawer extends StatelessWidget {
               ],
             );
           } else {
-            return const SizedBox(child: Center(
-              child: Text('drawer errror'),
-            ),);
+            return const SizedBox(
+              child: Center(
+                child: Text('drawer errror'),
+              ),
+            );
           }
         },
       ),

@@ -35,6 +35,7 @@ class _ScreenSearchPageState extends State<ScreenSearchPage> {
       body: Padding(
         padding: EdgeInsets.all(ResponsiveUtils.wp(4)),
         child: Column(
+          
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             TextStyles.headline(text: 'Search your bike'),

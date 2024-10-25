@@ -1,3 +1,4 @@
+import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
 import 'package:bright_bike_rentals/core/colors.dart';
 import 'package:bright_bike_rentals/core/constants.dart';
 import 'package:bright_bike_rentals/core/responsive_utils.dart';
@@ -9,6 +10,7 @@ import 'package:bright_bike_rentals/presentation/screens/homepage/widgets/quates
 import 'package:bright_bike_rentals/presentation/screens/homepage/widgets/shimmer.dart';
 import 'package:bright_bike_rentals/presentation/widgets/custom_appbar.dart';
 import 'package:bright_bike_rentals/presentation/widgets/custom_navigator.dart';
+import 'package:bright_bike_rentals/presentation/widgets/custom_snackbar.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/cupertino.dart';
@@ -39,16 +41,22 @@ class _ScreenHomepageState extends State<ScreenHomepage> {
     return Stack(children: [
       BlocConsumer<FetchDashbordBloc, FetchDashbordState>(
         listener: (context, state) {
-          // TODO: implement listener
+          if (state is FetchDashbordDataErrorState) {
+              CustomSnackBar.show(
+                                    context: context,
+                                    title: 'Error!',
+                                    message: state.message,
+                                    contentType: ContentType.failure);
+          }
         },
         builder: (context, state) {
           if (state is FetchDashbordDataLoadingState) {
-            return ScreenHomepageShimmer();
+            return const ScreenHomepageShimmer();
           }
           if (state is FetchDashbordDataSuccessState) {
             return Scaffold(
                 appBar: const CustomAppBar(),
-                drawer:CustomDrawer(),
+                drawer:const CustomDrawer(),
                 body: ListView(
                   padding: EdgeInsets.all(ResponsiveUtils.wp(4)),
                   children: [
@@ -258,7 +266,7 @@ class _ScreenHomepageState extends State<ScreenHomepage> {
                   ],
                 ));
           } else {
-            return SizedBox();
+            return const SizedBox();
           }
         },
       ),

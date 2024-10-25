@@ -121,6 +121,7 @@ class _AdvancedSplashScreenState extends State<AdvancedSplashScreen>
 
     _controller.forward();
     navigate(context);
+    context.read<SettingsBlocBloc>().add(SettingsDataInitialFetchingEvent());
   }
 
   @override
@@ -188,5 +189,4 @@ class _AdvancedSplashScreenState extends State<AdvancedSplashScreen>
     await Future.delayed(const Duration(seconds: 3));
     navigatePush(context, ScreenMainPage());
   }
- 
 }
